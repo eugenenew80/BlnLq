@@ -483,4 +483,28 @@
 				referencedColumnNames="id"
 		/>
 	</changeSet>
+
+	<changeSet id="lq-rus-28" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to fin_sale_invoice_lines</comment>
+		<addColumn schemaName="apps"
+				   tableName="fin_sale_invoice_lines">
+			<column name="bp_id" type="number" remarks="идентификатор бизнес партнера"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-29" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to fin_sale_invoice_lines</comment>
+		<addColumn schemaName="apps"
+				   tableName="fin_sale_invoice_lines">
+			<column name="original_price" type="number" remarks="исходная цена"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-30" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to fin_sale_invoice_lines</comment>
+		<addColumn schemaName="apps"
+				   tableName="fin_sale_invoice_lines">
+			<column name="original_discount" type="number" remarks="исходная скидка"/>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>
