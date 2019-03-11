@@ -507,4 +507,48 @@
 			<column name="original_discount" type="number" remarks="исходная скидка"/>
 		</addColumn>
 	</changeSet>
+
+	<changeSet id="lq-rus-31" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to wf_object_workflows</comment>
+		<addColumn schemaName="apps"
+				   tableName="wf_object_workflows">
+			<column name="canceled_by" type="number" remarks="Кто отменил"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-32" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to cm_doc_keg_cte_consortium</comment>
+		<addColumn schemaName="apps"
+				   tableName="cm_doc_keg_cte_consortium">
+			<column name="order_num" type="number" remarks="Порядковый номер вывода"/>
+		</addColumn>
+
+		<addColumn schemaName="apps"
+				   tableName="cm_doc_keg_cte_consortium">
+			<column name="integer_value" type="number" remarks="Значение целого числа"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-33" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>creating index for table: mdfem_history</comment>
+		<createIndex indexName="idx_mdfem_history_1" schemaName="apps" tableName="mdfem_history">
+			<column name="metering_point_id"  type="number"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="lй-rus-34" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: cm_doc_keg_cte_consortium</comment>
+		<dropColumn tableName="cm_doc_keg_cte_consortium" schemaName="apps">
+			<column name="integer_value"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-35" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to cm_doc_keg_cte</comment>
+		<addColumn schemaName="apps"
+				   tableName="cm_doc_keg_cte">
+			<column name="integer_value" type="number" remarks="Значение целого числа для консорциума"/>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>
