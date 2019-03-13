@@ -551,4 +551,12 @@
 			<column name="integer_value" type="number" remarks="Значение целого числа для консорциума"/>
 		</addColumn>
 	</changeSet>
+
+	<changeSet id="lq-rus-36" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to calc_service_values_reconciliations</comment>
+		<addColumn schemaName="apps"
+				   tableName="calc_service_values_reconciliations">
+			<column name="val_for_vpk" type="number" remarks="Значение для ВПК"/>
+		</addColumn>
+	</changeSet>
 </databaseChangeLog>
