@@ -2476,4 +2476,11 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-rus-147" logicalFilePath="path-independent" author="ruslan" context="dev">
+	<comment>add column to fin_payment_request_consortium</comment>
+	<addColumn schemaName="apps"
+			   tableName="fin_payment_request_consortium">
+		<column name="order_num" type="number" remarks="Тип документа"/>
+	</addColumn>
+</changeSet>
 </databaseChangeLog>
