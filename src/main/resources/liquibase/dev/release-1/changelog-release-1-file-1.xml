@@ -2467,4 +2467,13 @@
 				referencedColumnNames="code"
 		/>
 	</changeSet>
+
+	<changeSet id="lq-rus-146" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: fin_payment_request_consortium</comment>
+		<dropColumn tableName="fin_payment_request_consortium" schemaName="apps">
+			<column name="line_id"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
