@@ -2870,4 +2870,60 @@
 		</sql>
 		<rollback/>
 	</changeSet>
+
+    <changeSet id="lq-rus-178" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify is_include_in_total default 0;
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify display_all_modes_bypass1_id default 0;
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify display_all_modes_bypass2_id default 0;
+			alter table APPS.CALC_ACT_INTER_PL_RESULT_LINES modify is_bound_meter_inst default 0;
+
+			alter table APPS.CALC_ACT_INTER_PL_HEADERS
+			add constraint FK_CALC_ACT_INTER_PL_HEADERS_5 foreign key (TEMPLATE_ID)
+			references APPS.calc_act_inter_pl_headers (ID) on delete set null
+			deferrable;
+
+			alter table APPS.CALC_ACT_INTER_PL_RESULT_MR_LINES modify is_bypass_bus_section default 0;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-179" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+            create view apps.calc_act_inter_pl_sides_v as
+            select 1 as side from dual
+            union all
+            select 2 as side from dual;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-180" logicalFilePath="path-independent" author="ruslan" context="dev">
+        <comment>Creating foreign constraint: plan_production_plan_lines to dict_gjs</comment>
+        <addForeignKeyConstraint
+                baseTableSchemaName="apps"
+                baseTableName="plan_production_plan_lines"
+                baseColumnNames="gjs_id"
+                constraintName="fk_plan_production_plan_lines_8"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedTableSchemaName="apps"
+                referencedTableName="dict_gjs"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="lq-rus-181" logicalFilePath="path-independent" author="ruslan" context="dev">
+        <comment>add column fin_sale_invoices</comment>
+        <addColumn schemaName="apps" tableName="fin_sale_invoices">
+            <column name="is_vpk" type="number" remarks="СФ с частичным применением ВПК">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
