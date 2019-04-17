@@ -2926,4 +2926,179 @@
         </addColumn>
     </changeSet>
 
+	<changeSet id="lq-rus-182" logicalFilePath="path-independent" author="ruslan" context="dev">
+	<comment> Create table calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			create table apps.CALC_PERIOD_AND_DATA_TYPES
+			(
+			id               NUMBER not null,
+			doc_type_code    VARCHAR2(30) not null,
+			period_type_code VARCHAR2(30) not null,
+			data_type_code   VARCHAR2(30) not null,
+			create_by        NUMBER,
+			create_date      TIMESTAMP(6),
+			last_update_by   NUMBER,
+			last_update_date TIMESTAMP(6)
+			)
+			tablespace USERS
+			pctfree 10
+			initrans 1
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+			-- Add comments to the table
+			comment on table apps.CALC_PERIOD_AND_DATA_TYPES
+			is 'Допустимые комбинации вида расчета и расчетного периода для типов документов';
+			-- Add comments to the columns
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.id
+			is 'Идентификатор строки';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.doc_type_code
+			is 'Код типа документа';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.period_type_code
+			is 'Код типа периода расчета';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.data_type_code
+			is 'Код вида расчета';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.create_by
+			is 'Автор записи';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.create_date
+			is 'Дата и время создания записи';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.last_update_by
+			is 'Автор последнего изменения';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.last_update_date
+			is 'Дата и время последнего изменения';
+
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table apps.CALC_PERIOD_AND_DATA_TYPES
+			add constraint CALC_PERIOD_AND_DATA_TYPES_PK primary key (ID)
+			using index
+			tablespace USERS
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+
+			alter table apps.CALC_PERIOD_AND_DATA_TYPES
+			add constraint CALC_PERIOD_AND_DATA_TYPES_N1 foreign key (DOC_TYPE_CODE)
+			references apps.DM_DOC_TYPES (CODE)
+			deferrable initially deferred;
+			alter table apps.CALC_PERIOD_AND_DATA_TYPES
+			add constraint CALC_PERIOD_AND_DATA_TYPES_N2 foreign key (PERIOD_TYPE_CODE)
+			references apps.CALC_PERIOD_TYPES (CODE)
+			deferrable initially deferred;
+			alter table apps.CALC_PERIOD_AND_DATA_TYPES
+			add constraint CALC_PERIOD_AND_DATA_TYPES_N3 foreign key (DATA_TYPE_CODE)
+			references apps.CALC_DATA_TYPES (CODE)
+			deferrable initially deferred;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-183" logicalFilePath="path-independent" author="ruslan" context="dev">
+	<comment> Create view apps.calc_period_and_data_types_v</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			create or replace view apps.calc_period_and_data_types_v as
+			SELECT pdt.*
+			,doctl.short_name doc_type_short_name
+			,pttl.name        period_type_name
+			,dttl.name        data_type_name
+			FROM apps.calc_period_and_data_types pdt
+			LEFT JOIN apps.dm_doc_types doc on doc.code = pdt.doc_type_code
+			LEFT JOIN apps.dm_doc_types_tl doctl on doctl.doc_type_id = doc.id
+			and doctl.lang = adm_cfg.adm_locale
+			LEFT JOIN apps.calc_period_types_tl pttl on pttl.code = pdt.period_type_code
+			and pttl.lang = adm_cfg.adm_locale
+			LEFT JOIN apps.calc_data_types_tl dttl on dttl.code = pdt.data_type_code
+			and dttl.lang = adm_cfg.adm_locale
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-184" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="fin_sale_invoices">
+			<column name="period_start_date" type="number" remarks="Прогнозный период с">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-185" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="fin_sale_invoices">
+			<column name="period_end_date" type="number" remarks="Прогнозный период по">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-186" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: plan_production_plans</comment>
+		<dropColumn tableName="plan_production_plans" schemaName="apps">
+			<column name="period_start_date"/>
+		</dropColumn>
+
+		<dropColumn tableName="plan_production_plans" schemaName="apps">
+			<column name="period_end_date"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-187" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: fin_sale_invoices</comment>
+		<dropColumn tableName="fin_sale_invoices" schemaName="apps">
+			<column name="period_start_date"/>
+		</dropColumn>
+
+		<dropColumn tableName="fin_sale_invoices" schemaName="apps">
+			<column name="period_end_date"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-188" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="plan_production_plans">
+			<column name="period_start_date" type="date" remarks="Прогнозный период с">
+				<constraints nullable="true"/>
+			</column>
+			<column name="period_end_date" type="date" remarks="Прогнозный период по">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-189" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop foreign constraint: plan_production_plans</comment>
+		<dropForeignKeyConstraint baseTableName="plan_production_plan_lines" constraintName="fk_plan_production_plan_lines_3" baseTableSchemaName="apps"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-190" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: plan_production_plan_lines to plan_volume_ee_lines</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="plan_production_plan_lines"
+				baseColumnNames="volume_ee_line_id"
+				constraintName="fk_plan_production_plan_lines_3"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="plan_volume_ee_lines"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
 </databaseChangeLog>
