@@ -3101,4 +3101,282 @@
 		/>
 	</changeSet>
 
+	<changeSet id="lq-rus-191" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: calc_electricity_producer_source_platform</comment>
+		<createTable tableName="calc_electricity_producer_source_platform" remarks="Электростанции-площадки" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="producer_source_id" type="number" remarks="Идентификатор электростанции в привезки к группе станций">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="bp_id" type="number" remarks="Идентификатор бп">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="order_num" type="number" remarks="Порядок вывода">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="cadastral_number" type="varchar2(500)" remarks="Кадастровый номер">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="total_area" type="number" remarks="Общая площадь">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="area_unit_id" type="number" remarks="Ед. измерения площади">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="power" type="number" remarks="Суммарно установленная мощность">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="power_unit_id" type="number" remarks="Ед. измерения мощности">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="coff_power_use" type="number" remarks="Прогнозный коэффициент использования установленной мощности электростанции">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="start_date" type="date" remarks="Дата ввода в эксплуатацию">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="end_date" type="date" remarks="Дата вывода из эксплуатации">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-192" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: calc_electricity_producer_source_platform</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_calc_electricity_producer_source_platform"
+				schemaName="apps"
+				tableName="calc_electricity_producer_source_platform"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-193" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: mdfem_history_tl</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="calc_electricity_producer_source_platform_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-194" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform to dict_business_partners</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform"
+				baseColumnNames="bp_id"
+				constraintName="fk_calc_electricity_producer_source_platform_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_business_partners"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-195" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform to calc_electricity_producer_sources</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform"
+				baseColumnNames="producer_source_id"
+				constraintName="fk_calc_electricity_producer_source_platform_2"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="calc_electricity_producer_sources"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-196" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform to dict_units</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform"
+				baseColumnNames="area_unit_id"
+				constraintName="fk_calc_electricity_producer_source_platform_3"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_units"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-197" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform to dict_units</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform"
+				baseColumnNames="power_unit_id"
+				constraintName="fk_calc_electricity_producer_source_platform_4"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_units"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-198" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: calc_electricity_producer_source_platform_tl</comment>
+		<createTable tableName="calc_electricity_producer_source_platform_tl" remarks="Электростанции-площадки Перевод" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar2(10)" remarks="Язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="platform_id" type="number" remarks="Ссылка на родительскую запись">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="name" type="varchar2(500)" remarks="Наименование площадки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-199" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: calc_electricity_producer_source_platform_tl</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_calc_electricity_producer_source_platform_tl"
+				schemaName="apps"
+				tableName="calc_electricity_producer_source_platform_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-200" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: calc_electricity_producer_source_platform_tl</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="calc_electricity_producer_source_platform_tl_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-201" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>creating unique constraint for table: calc_electricity_producer_source_platform_tl</comment>
+		<addUniqueConstraint
+				constraintName="un_calc_electricity_producer_source_platform_tl_1"
+				schemaName="apps"
+				tableName="calc_electricity_producer_source_platform_tl"
+				columnNames="platform_id, lang"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-202" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform_tl to calc_electricity_producer_source_platform</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform_tl"
+				baseColumnNames="platform_id"
+				constraintName="fk_calc_electricity_producer_source_platform_tl_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="calc_electricity_producer_source_platform"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-203" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="plan_production_plans">
+			<column name="period_start_date" type="date" remarks="Прогнозный период с">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+    </changeSet>
+
+	<changeSet id="lq-rus-204" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="plan_production_plans">
+			<column name="period_end_date" type="date" remarks="Прогнозный период по">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+    </changeSet>
+
+	<changeSet id="lq-rus-205" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop not null constraint calc_act_inter_pl_lines</comment>
+		<dropNotNullConstraint columnDataType="number"
+							   columnName="is_bound_meter_inst"
+							   schemaName="apps"
+							   tableName="calc_act_inter_pl_lines"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-206" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop not null constraint calc_act_inter_pl_lines</comment>
+		<dropNotNullConstraint columnDataType="number"
+							   columnName="is_proportion_length "
+							   schemaName="apps"
+							   tableName="calc_act_inter_pl_lines"/>
+		<rollback/>
+	</changeSet>
+
+
 </databaseChangeLog>
