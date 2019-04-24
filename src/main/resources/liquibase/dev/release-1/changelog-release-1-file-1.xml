@@ -3378,5 +3378,53 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-rus-207" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_time_series00.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-208" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_time_series01.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-209" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_time_series02.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-211" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_time_series_v.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
 
 </databaseChangeLog>
