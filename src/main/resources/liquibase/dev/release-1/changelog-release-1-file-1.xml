@@ -1925,7 +1925,6 @@
 		<insert tableName="DICT_METERING_DEVICES_STATUSES" schemaName="apps">
 			<column name="code" value="MDS_NOT_USED" />
 		</insert>
-
 		<rollback/>
 	</changeSet>
 
@@ -3423,6 +3422,173 @@
 				 relativeToChangelogFile="true"
 				 splitStatements="true"
 				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-212" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Adding data to table: RES_LOAD_TYPES</comment>
+		<insert tableName="RES_LOAD_TYPES" schemaName="apps">
+			<column name="code" value="FORECAST" />
+		</insert>
+
+		<insert tableName="RES_LOAD_TYPES" schemaName="apps">
+			<column name="code" value="FACT" />
+		</insert>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-213" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Adding data to table: RES_LOAD_TYPES_TL</comment>
+		<insert tableName="RES_LOAD_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST" />
+			<column name="lang" value="RU" />
+			<column name="name" value="Прогноз" />
+		</insert>
+
+		<insert tableName="RES_LOAD_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST" />
+			<column name="lang" value="KZ" />
+			<column name="name" value="Прогноз" />
+		</insert>
+
+		<insert tableName="RES_LOAD_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT" />
+			<column name="lang" value="RU" />
+			<column name="name" value="Факт"/>
+		</insert>
+
+		<insert tableName="RES_LOAD_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT" />
+			<column name="lang" value="KZ" />
+			<column name="name" value="Факт"/>
+		</insert>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-214" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Adding data to table: RES_TIME_SERIES_TYPES</comment>
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FORECAST_PROD" />
+			<column name="load_type_code" value="FORECAST" />
+			<column name="param_id" value="39" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FORECAST_SALE" />
+			<column name="load_type_code" value="FORECAST" />
+			<column name="param_id" value="16" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FORECAST_PURCHASE" />
+			<column name="load_type_code" value="FACT" />
+			<column name="param_id" value="17" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FACT_PROD"/>
+			<column name="load_type_code" value="FACT" />
+			<column name="param_id" value="39" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FACT_SALE"/>
+			<column name="load_type_code" value="FACT" />
+			<column name="param_id" value="16" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FACT_PURCHASE"/>
+			<column name="load_type_code" value="FACT"/>
+			<column name="param_id" value="17" />
+		</insert>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-215" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Change column in table RES_TIME_SERIES_TYPES_TL</comment>
+		<modifyDataType
+				tableName="RES_TIME_SERIES_TYPES_TL"
+				schemaName="apps"
+				columnName="name"
+				newDataType="varchar2(50)"
+		/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-216" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Adding data to table: RES_TIME_SERIES_TYPES_TL</comment>
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_PROD" />
+			<column name="lang" value="RU" />
+			<column name="name" value="Прогноз объемов отпуска в сеть" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_PROD" />
+			<column name="lang" value="KZ" />
+			<column name="name" value="Прогноз объемов отпуска в сеть" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_SALE" />
+			<column name="lang" value="RU" />
+			<column name="name" value="Прогноз объемов продажи УП" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_SALE" />
+			<column name="lang" value="KZ" />
+			<column name="name" value="Прогноз объемов продажи УП" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_PURCHASE"/>
+			<column name="lang" value="RU" />
+			<column name="name" value="Прогноз объемов покупки" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_PURCHASE"/>
+			<column name="lang" value="KZ" />
+			<column name="name" value="Прогноз объемов покупки" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_PROD"/>
+			<column name="lang" value="RU"/>
+			<column name="name" value="Фактические объемы отпуска в сеть"/>
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_PROD"/>
+			<column name="lang" value="KZ"/>
+			<column name="name" value="Фактические объемы отпуска в сеть" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_SALE"/>
+			<column name="lang" value="RU"/>
+			<column name="name" value="Фактические объемы продажи УП" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_SALE"/>
+			<column name="lang" value="KZ"/>
+			<column name="name" value="Фактические объемы продажи УП" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_PURCHASE"/>
+			<column name="lang" value="RU"/>
+			<column name="name" value="Фактические объемы покупки"/>
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_PURCHASE"/>
+			<column name="lang" value="KZ"/>
+			<column name="name" value="Фактические объемы покупки"/>
+		</insert>
 		<rollback/>
 	</changeSet>
 
