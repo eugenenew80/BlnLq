@@ -1925,7 +1925,6 @@
 		<insert tableName="DICT_METERING_DEVICES_STATUSES" schemaName="apps">
 			<column name="code" value="MDS_NOT_USED" />
 		</insert>
-
 		<rollback/>
 	</changeSet>
 
@@ -2475,5 +2474,1123 @@
 		</dropColumn>
 		<rollback/>
 	</changeSet>
+
+	<changeSet id="lq-rus-147" logicalFilePath="path-independent" author="ruslan" context="dev">
+	<comment>add column to fin_payment_request_consortium</comment>
+	<addColumn schemaName="apps"
+			   tableName="fin_payment_request_consortium">
+		<column name="order_num" type="number" remarks="Тип документа"/>
+	</addColumn>
+</changeSet>
+
+	<changeSet id="lq-rus-148" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column mdfem_history</comment>
+		<addColumn schemaName="apps"
+				   tableName="mdfem_history">
+			<column name="meter_last_verification_date" type="number" remarks="Дата последней поверки счетчика"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-149" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop foreign constraint: calc_act_inter_pl_lines</comment>
+		<dropForeignKeyConstraint baseTableName="calc_act_inter_pl_lines" constraintName="fk_calc_act_inter_pl_lines_10" baseTableSchemaName="apps"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-150" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop foreign constraint: calc_act_inter_pl_lines</comment>
+		<dropForeignKeyConstraint baseTableName="calc_act_inter_pl_lines" constraintName="fk_calc_act_inter_pl_lines_8" baseTableSchemaName="apps"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-151" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column calc_act_inter_pl_lines</comment>
+		<addColumn schemaName="apps" tableName="calc_service_values_reconciliations">
+			<column name="is_inverse_mp1" type="number" remarks="Инвертировать направление в точке учета 1" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+
+		<addColumn schemaName="apps" tableName="calc_service_values_reconciliations">
+			<column name="is_inverse_mp2" type="number" remarks="Инвертировать направление в точке учета 2" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-152" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: calc_service_values_reconciliations</comment>
+		<dropColumn tableName="calc_service_values_reconciliations" schemaName="apps">
+			<column name="is_inverse_mp1"/>
+		</dropColumn>
+
+		<dropColumn tableName="calc_service_values_reconciliations" schemaName="apps">
+			<column name="is_inverse_mp2"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-153" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column calc_act_inter_pl_lines</comment>
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_lines">
+			<column name="is_inverse_mp1" type="number" remarks="Инвертировать направление в точке учета 1" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_lines">
+			<column name="is_inverse_mp2" type="number" remarks="Инвертировать направление в точке учета 2" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-154" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			update APPS.CALC_ACT_INTER_PL_LINES t
+			set t.display_all_modes_bypass1_id = 0
+			,t.display_all_modes_bypass2_id = 0
+			,t.IS_INVERSE_MP1 = 0
+			,t.IS_INVERSE_MP2 = 0;
+
+			update APPS.CALC_ACT_INTER_PL_LINES t
+			set t.IS_INCLUDE_IN_TOTAL = 0
+			where t.IS_INCLUDE_IN_TOTAL is null;
+
+			comment on column APPS.CALC_ACT_INTER_PL_LINES.metering_point_id_1
+			is 'ТУ на стороне 1';
+
+			comment on column APPS.CALC_ACT_INTER_PL_LINES.metering_point_id_2
+			is 'ТУ на стороне 2';
+
+			comment on column APPS.CALC_ACT_INTER_PL_LINES.power_line_length
+			is 'Протяженность линии, км';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-155" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add not null constraint calc_act_inter_pl_lines</comment>
+		<addNotNullConstraint
+				columnDataType="number"
+				columnName="display_all_modes_bypass1_id"
+				defaultNullValue="0"
+				schemaName="apps"
+				tableName="calc_act_inter_pl_lines"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-156" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add not null constraint calc_act_inter_pl_lines</comment>
+		<addNotNullConstraint
+				columnDataType="number"
+				columnName="display_all_modes_bypass2_id"
+				defaultNullValue="0"
+				schemaName="apps"
+				tableName="calc_act_inter_pl_lines"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-157" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add not null constraint calc_act_inter_pl_lines</comment>
+		<addNotNullConstraint
+				columnDataType="number"
+				columnName="is_include_in_total"
+				defaultNullValue="0"
+				schemaName="apps"
+				tableName="calc_act_inter_pl_lines"/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-158" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column calc_act_inter_pl_result_lines</comment>
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_result_lines">
+			<column name="is_inverse_mp1" type="number" remarks="Направления в точке учета 1 инвертированы" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_result_lines">
+			<column name="is_inverse_mp2" type="number" remarks="Направления в точке учета 2 инвертированы" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-159" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			update APPS.CALC_ACT_INTER_PL_RESULT_LINES t
+			set t.is_inverse_mp1 = 0
+			,t.is_inverse_mp2 = 0;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-160" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column calc_act_inter_pl_result_lines</comment>
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_result_lines">
+			<column name="total_losses_on_side1x" type="number" remarks="Суммарные сложившиеся потери в обоих направлениях на стороне 1">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_result_lines">
+			<column name="total_losses_on_side2x" type="number" remarks="Суммарные сложившиеся потери в обоих направлениях на стороне 1">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-161" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			comment on column APPS.CALC_ACT_INTER_PL_RESULT_LINES.mv_define_by_side
+			is 'Время работы ЛЭП на прием и на выдачу, а также среднее напряжение, определять по стороне';
+			comment on column APPS.CALC_ACT_INTER_PL_RESULT_LINES.power_line_length
+			is 'Протяженность линии всего, км';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-162" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop foreign constraint: calc_act_inter_pl_result_lines</comment>
+		<dropForeignKeyConstraint baseTableName="calc_act_inter_pl_result_lines" constraintName="fk_calc_act_inter_pl_result_lines_12" baseTableSchemaName="apps"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-163" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop foreign constraint: calc_act_inter_pl_result_lines</comment>
+		<dropForeignKeyConstraint baseTableName="calc_act_inter_pl_result_lines" constraintName="fk_calc_act_inter_pl_result_lines_9" baseTableSchemaName="apps"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-164" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column calc_act_inter_pl_result_det_lines</comment>
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_result_det_lines">
+			<column name="mp1_status_code" type="varchar2(30)" remarks="Статус в ТУ1, принятый к расчету">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_result_det_lines">
+			<column name="mp2_status_code" type="varchar2(30)" remarks="Статус в ТУ2, принятый к расчету">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_result_det_lines">
+			<column name="actually_dm_of_losses_code" type="varchar2(30)" remarks="Фактически использованный метод расчета потерь в ЛЭП">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+
+		<addColumn schemaName="apps" tableName="calc_act_inter_pl_result_det_lines">
+			<column name="is_alternative_method" type="number" remarks="Значения посчитаны по альтернативному методу" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-165" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_det_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			update APPS.CALC_ACT_INTER_PL_RESULT_DET_LINES t
+			set t.is_alternative_method = 0;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-166" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_act_inter_pl_result_det_lines to dm_doc_types</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_act_inter_pl_result_det_lines"
+				baseColumnNames="mp1_status_code"
+				constraintName="fk_calc_act_inter_pl_result_det_lines_5"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_metering_devices_statuses"
+				referencedColumnNames="code"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-167" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_act_inter_pl_result_det_lines to dm_doc_types</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_act_inter_pl_result_det_lines"
+				baseColumnNames="mp2_status_code"
+				constraintName="fk_calc_act_inter_pl_result_det_lines_6"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_metering_devices_statuses"
+				referencedColumnNames="code"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-168" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_act_inter_pl_result_det_lines to dm_doc_types</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_act_inter_pl_result_det_lines"
+				baseColumnNames="actually_dm_of_losses_code"
+				constraintName="fk_calc_act_inter_pl_result_det_lines_7"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_dm_of_losses_in_pl"
+				referencedColumnNames="code"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-169" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			comment on column APPS.CALC_ACT_INTER_PL_RESULT_MR_LINES.include_in_calculation
+			is 'Включить в расчет объема в точке учета';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-170" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Change column in table mdfem_history</comment>
+		<modifyDataType
+				tableName="mdfem_history"
+				schemaName="apps"
+				columnName="meter_last_verification_date"
+				newDataType="date"
+		/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-171" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>creating unique constraint for table: plan_volume_ee_headers</comment>
+		<addUniqueConstraint
+				constraintName="un_plan_volume_ee_headers_1"
+				schemaName="apps"
+				tableName="plan_volume_ee_headers"
+				columnNames="contract_id, gjs_id, year, plan_type"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-172" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop not null constraint plan_production_plan_lines</comment>
+		<dropNotNullConstraint columnDataType="number"
+							   columnName="volume_ee_line_id"
+							   schemaName="apps"
+							   tableName="plan_production_plan_lines"/>
+		<rollback/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-173" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_volume_ee_headers</comment>
+		<addColumn schemaName="apps" tableName="plan_volume_ee_headers">
+			<column name="template_id" type="number" remarks="Идентификатор шаблона">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-174" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: plan_volume_ee_headers to plan_volume_ee_headers</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="plan_volume_ee_headers"
+				baseColumnNames="template_id"
+				constraintName="fk_plan_volume_ee_headers_11"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="plan_volume_ee_headers"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-175" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: plan_volume_ee_headers</comment>
+		<dropColumn tableName="plan_volume_ee_headers" schemaName="apps">
+			<column name="template_id"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-176" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="plan_production_plans">
+			<column name="template_id" type="number" remarks="Идентификатор шаблона">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-177" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: plan_production_plans to plan_production_plans</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="plan_production_plans"
+				baseColumnNames="template_id"
+				constraintName="fk_plan_production_plans_6"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="plan_production_plans"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-178" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify is_include_in_total default 0;
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify display_all_modes_bypass1_id default 0;
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify display_all_modes_bypass2_id default 0;
+			alter table APPS.CALC_ACT_INTER_PL_RESULT_LINES modify is_bound_meter_inst default 0;
+
+			alter table APPS.CALC_ACT_INTER_PL_HEADERS
+			add constraint FK_CALC_ACT_INTER_PL_HEADERS_5 foreign key (TEMPLATE_ID)
+			references APPS.calc_act_inter_pl_headers (ID) on delete set null
+			deferrable;
+
+			alter table APPS.CALC_ACT_INTER_PL_RESULT_MR_LINES modify is_bypass_bus_section default 0;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-178" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify is_include_in_total default 0;
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify display_all_modes_bypass1_id default 0;
+			alter table APPS.CALC_ACT_INTER_PL_LINES modify display_all_modes_bypass2_id default 0;
+			alter table APPS.CALC_ACT_INTER_PL_RESULT_LINES modify is_bound_meter_inst default 0;
+
+			alter table APPS.CALC_ACT_INTER_PL_HEADERS
+			add constraint FK_CALC_ACT_INTER_PL_HEADERS_5 foreign key (TEMPLATE_ID)
+			references APPS.calc_act_inter_pl_headers (ID) on delete set null
+			deferrable;
+
+			alter table APPS.CALC_ACT_INTER_PL_RESULT_MR_LINES modify is_bypass_bus_section default 0;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-179" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+            create view apps.calc_act_inter_pl_sides_v as
+            select 1 as side from dual
+            union all
+            select 2 as side from dual;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-180" logicalFilePath="path-independent" author="ruslan" context="dev">
+        <comment>Creating foreign constraint: plan_production_plan_lines to dict_gjs</comment>
+        <addForeignKeyConstraint
+                baseTableSchemaName="apps"
+                baseTableName="plan_production_plan_lines"
+                baseColumnNames="gjs_id"
+                constraintName="fk_plan_production_plan_lines_8"
+                deferrable="true"
+                initiallyDeferred="true"
+                onDelete="RESTRICT"
+                onUpdate="RESTRICT"
+                referencedTableSchemaName="apps"
+                referencedTableName="dict_gjs"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="lq-rus-181" logicalFilePath="path-independent" author="ruslan" context="dev">
+        <comment>add column fin_sale_invoices</comment>
+        <addColumn schemaName="apps" tableName="fin_sale_invoices">
+            <column name="is_vpk" type="number" remarks="СФ с частичным применением ВПК">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+	<changeSet id="lq-rus-182" logicalFilePath="path-independent" author="ruslan" context="dev">
+	<comment> Create table calc_act_inter_pl_result_mr_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			create table apps.CALC_PERIOD_AND_DATA_TYPES
+			(
+			id               NUMBER not null,
+			doc_type_code    VARCHAR2(30) not null,
+			period_type_code VARCHAR2(30) not null,
+			data_type_code   VARCHAR2(30) not null,
+			create_by        NUMBER,
+			create_date      TIMESTAMP(6),
+			last_update_by   NUMBER,
+			last_update_date TIMESTAMP(6)
+			)
+			tablespace USERS
+			pctfree 10
+			initrans 1
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+			-- Add comments to the table
+			comment on table apps.CALC_PERIOD_AND_DATA_TYPES
+			is 'Допустимые комбинации вида расчета и расчетного периода для типов документов';
+			-- Add comments to the columns
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.id
+			is 'Идентификатор строки';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.doc_type_code
+			is 'Код типа документа';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.period_type_code
+			is 'Код типа периода расчета';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.data_type_code
+			is 'Код вида расчета';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.create_by
+			is 'Автор записи';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.create_date
+			is 'Дата и время создания записи';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.last_update_by
+			is 'Автор последнего изменения';
+			comment on column apps.CALC_PERIOD_AND_DATA_TYPES.last_update_date
+			is 'Дата и время последнего изменения';
+
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table apps.CALC_PERIOD_AND_DATA_TYPES
+			add constraint CALC_PERIOD_AND_DATA_TYPES_PK primary key (ID)
+			using index
+			tablespace USERS
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+
+			alter table apps.CALC_PERIOD_AND_DATA_TYPES
+			add constraint CALC_PERIOD_AND_DATA_TYPES_N1 foreign key (DOC_TYPE_CODE)
+			references apps.DM_DOC_TYPES (CODE)
+			deferrable initially deferred;
+			alter table apps.CALC_PERIOD_AND_DATA_TYPES
+			add constraint CALC_PERIOD_AND_DATA_TYPES_N2 foreign key (PERIOD_TYPE_CODE)
+			references apps.CALC_PERIOD_TYPES (CODE)
+			deferrable initially deferred;
+			alter table apps.CALC_PERIOD_AND_DATA_TYPES
+			add constraint CALC_PERIOD_AND_DATA_TYPES_N3 foreign key (DATA_TYPE_CODE)
+			references apps.CALC_DATA_TYPES (CODE)
+			deferrable initially deferred;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-183" logicalFilePath="path-independent" author="ruslan" context="dev">
+	<comment> Create view apps.calc_period_and_data_types_v</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			create or replace view apps.calc_period_and_data_types_v as
+			SELECT pdt.*
+			,doctl.short_name doc_type_short_name
+			,pttl.name        period_type_name
+			,dttl.name        data_type_name
+			FROM apps.calc_period_and_data_types pdt
+			LEFT JOIN apps.dm_doc_types doc on doc.code = pdt.doc_type_code
+			LEFT JOIN apps.dm_doc_types_tl doctl on doctl.doc_type_id = doc.id
+			and doctl.lang = adm_cfg.adm_locale
+			LEFT JOIN apps.calc_period_types_tl pttl on pttl.code = pdt.period_type_code
+			and pttl.lang = adm_cfg.adm_locale
+			LEFT JOIN apps.calc_data_types_tl dttl on dttl.code = pdt.data_type_code
+			and dttl.lang = adm_cfg.adm_locale
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-184" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="fin_sale_invoices">
+			<column name="period_start_date" type="number" remarks="Прогнозный период с">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-185" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="fin_sale_invoices">
+			<column name="period_end_date" type="number" remarks="Прогнозный период по">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-186" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: plan_production_plans</comment>
+		<dropColumn tableName="plan_production_plans" schemaName="apps">
+			<column name="period_start_date"/>
+		</dropColumn>
+
+		<dropColumn tableName="plan_production_plans" schemaName="apps">
+			<column name="period_end_date"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-187" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: fin_sale_invoices</comment>
+		<dropColumn tableName="fin_sale_invoices" schemaName="apps">
+			<column name="period_start_date"/>
+		</dropColumn>
+
+		<dropColumn tableName="fin_sale_invoices" schemaName="apps">
+			<column name="period_end_date"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-188" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="plan_production_plans">
+			<column name="period_start_date" type="date" remarks="Прогнозный период с">
+				<constraints nullable="true"/>
+			</column>
+			<column name="period_end_date" type="date" remarks="Прогнозный период по">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-189" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop foreign constraint: plan_production_plans</comment>
+		<dropForeignKeyConstraint baseTableName="plan_production_plan_lines" constraintName="fk_plan_production_plan_lines_3" baseTableSchemaName="apps"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-190" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: plan_production_plan_lines to plan_volume_ee_lines</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="plan_production_plan_lines"
+				baseColumnNames="volume_ee_line_id"
+				constraintName="fk_plan_production_plan_lines_3"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="plan_volume_ee_lines"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-191" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: calc_electricity_producer_source_platform</comment>
+		<createTable tableName="calc_electricity_producer_source_platform" remarks="Электростанции-площадки" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="producer_source_id" type="number" remarks="Идентификатор электростанции в привезки к группе станций">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="bp_id" type="number" remarks="Идентификатор бп">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="order_num" type="number" remarks="Порядок вывода">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="cadastral_number" type="varchar2(500)" remarks="Кадастровый номер">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="total_area" type="number" remarks="Общая площадь">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="area_unit_id" type="number" remarks="Ед. измерения площади">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="power" type="number" remarks="Суммарно установленная мощность">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="power_unit_id" type="number" remarks="Ед. измерения мощности">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="coff_power_use" type="number" remarks="Прогнозный коэффициент использования установленной мощности электростанции">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="start_date" type="date" remarks="Дата ввода в эксплуатацию">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="end_date" type="date" remarks="Дата вывода из эксплуатации">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-192" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: calc_electricity_producer_source_platform</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_calc_electricity_producer_source_platform"
+				schemaName="apps"
+				tableName="calc_electricity_producer_source_platform"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-193" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: mdfem_history_tl</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="calc_electricity_producer_source_platform_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-194" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform to dict_business_partners</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform"
+				baseColumnNames="bp_id"
+				constraintName="fk_calc_electricity_producer_source_platform_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_business_partners"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-195" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform to calc_electricity_producer_sources</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform"
+				baseColumnNames="producer_source_id"
+				constraintName="fk_calc_electricity_producer_source_platform_2"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="calc_electricity_producer_sources"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-196" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform to dict_units</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform"
+				baseColumnNames="area_unit_id"
+				constraintName="fk_calc_electricity_producer_source_platform_3"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_units"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-197" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform to dict_units</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform"
+				baseColumnNames="power_unit_id"
+				constraintName="fk_calc_electricity_producer_source_platform_4"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_units"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-198" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: calc_electricity_producer_source_platform_tl</comment>
+		<createTable tableName="calc_electricity_producer_source_platform_tl" remarks="Электростанции-площадки Перевод" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar2(10)" remarks="Язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="platform_id" type="number" remarks="Ссылка на родительскую запись">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="name" type="varchar2(500)" remarks="Наименование площадки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-199" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: calc_electricity_producer_source_platform_tl</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_calc_electricity_producer_source_platform_tl"
+				schemaName="apps"
+				tableName="calc_electricity_producer_source_platform_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-200" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: calc_electricity_producer_source_platform_tl</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="calc_electricity_producer_source_platform_tl_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-201" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>creating unique constraint for table: calc_electricity_producer_source_platform_tl</comment>
+		<addUniqueConstraint
+				constraintName="un_calc_electricity_producer_source_platform_tl_1"
+				schemaName="apps"
+				tableName="calc_electricity_producer_source_platform_tl"
+				columnNames="platform_id, lang"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-202" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_electricity_producer_source_platform_tl to calc_electricity_producer_source_platform</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_electricity_producer_source_platform_tl"
+				baseColumnNames="platform_id"
+				constraintName="fk_calc_electricity_producer_source_platform_tl_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="calc_electricity_producer_source_platform"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-203" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="plan_production_plans">
+			<column name="period_start_date" type="date" remarks="Прогнозный период с">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+    </changeSet>
+
+	<changeSet id="lq-rus-204" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plans</comment>
+		<addColumn schemaName="apps" tableName="plan_production_plans">
+			<column name="period_end_date" type="date" remarks="Прогнозный период по">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+    </changeSet>
+
+	<changeSet id="lq-rus-205" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop not null constraint calc_act_inter_pl_lines</comment>
+		<dropNotNullConstraint columnDataType="number"
+							   columnName="is_bound_meter_inst"
+							   schemaName="apps"
+							   tableName="calc_act_inter_pl_lines"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-206" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop not null constraint calc_act_inter_pl_lines</comment>
+		<dropNotNullConstraint columnDataType="number"
+							   columnName="is_proportion_length "
+							   schemaName="apps"
+							   tableName="calc_act_inter_pl_lines"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-207" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_time_series00.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-208" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_time_series01.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-209" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_time_series02.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-211" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_time_series_v.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-212" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Adding data to table: RES_LOAD_TYPES</comment>
+		<insert tableName="RES_LOAD_TYPES" schemaName="apps">
+			<column name="code" value="FORECAST" />
+		</insert>
+
+		<insert tableName="RES_LOAD_TYPES" schemaName="apps">
+			<column name="code" value="FACT" />
+		</insert>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-213" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Adding data to table: RES_LOAD_TYPES_TL</comment>
+		<insert tableName="RES_LOAD_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST" />
+			<column name="lang" value="RU" />
+			<column name="name" value="Прогноз" />
+		</insert>
+
+		<insert tableName="RES_LOAD_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST" />
+			<column name="lang" value="KZ" />
+			<column name="name" value="Прогноз" />
+		</insert>
+
+		<insert tableName="RES_LOAD_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT" />
+			<column name="lang" value="RU" />
+			<column name="name" value="Факт"/>
+		</insert>
+
+		<insert tableName="RES_LOAD_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT" />
+			<column name="lang" value="KZ" />
+			<column name="name" value="Факт"/>
+		</insert>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-214" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Adding data to table: RES_TIME_SERIES_TYPES</comment>
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FORECAST_PROD" />
+			<column name="load_type_code" value="FORECAST" />
+			<column name="param_id" value="39" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FORECAST_SALE" />
+			<column name="load_type_code" value="FORECAST" />
+			<column name="param_id" value="16" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FORECAST_PURCHASE" />
+			<column name="load_type_code" value="FACT" />
+			<column name="param_id" value="17" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FACT_PROD"/>
+			<column name="load_type_code" value="FACT" />
+			<column name="param_id" value="39" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FACT_SALE"/>
+			<column name="load_type_code" value="FACT" />
+			<column name="param_id" value="16" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES" schemaName="apps">
+			<column name="code" value="FACT_PURCHASE"/>
+			<column name="load_type_code" value="FACT"/>
+			<column name="param_id" value="17" />
+		</insert>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-215" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Change column in table RES_TIME_SERIES_TYPES_TL</comment>
+		<modifyDataType
+				tableName="RES_TIME_SERIES_TYPES_TL"
+				schemaName="apps"
+				columnName="name"
+				newDataType="varchar2(50)"
+		/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-216" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Adding data to table: RES_TIME_SERIES_TYPES_TL</comment>
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_PROD" />
+			<column name="lang" value="RU" />
+			<column name="name" value="Прогноз объемов отпуска в сеть" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_PROD" />
+			<column name="lang" value="KZ" />
+			<column name="name" value="Прогноз объемов отпуска в сеть" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_SALE" />
+			<column name="lang" value="RU" />
+			<column name="name" value="Прогноз объемов продажи УП" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_SALE" />
+			<column name="lang" value="KZ" />
+			<column name="name" value="Прогноз объемов продажи УП" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_PURCHASE"/>
+			<column name="lang" value="RU" />
+			<column name="name" value="Прогноз объемов покупки" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FORECAST_PURCHASE"/>
+			<column name="lang" value="KZ" />
+			<column name="name" value="Прогноз объемов покупки" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_PROD"/>
+			<column name="lang" value="RU"/>
+			<column name="name" value="Фактические объемы отпуска в сеть"/>
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_PROD"/>
+			<column name="lang" value="KZ"/>
+			<column name="name" value="Фактические объемы отпуска в сеть" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_SALE"/>
+			<column name="lang" value="RU"/>
+			<column name="name" value="Фактические объемы продажи УП" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_SALE"/>
+			<column name="lang" value="KZ"/>
+			<column name="name" value="Фактические объемы продажи УП" />
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_PURCHASE"/>
+			<column name="lang" value="RU"/>
+			<column name="name" value="Фактические объемы покупки"/>
+		</insert>
+
+		<insert tableName="RES_TIME_SERIES_TYPES_TL" schemaName="apps">
+			<column name="code" value="FACT_PURCHASE"/>
+			<column name="lang" value="KZ"/>
+			<column name="name" value="Фактические объемы покупки"/>
+		</insert>
+		<rollback/>
+	</changeSet>
+
 
 </databaseChangeLog>
