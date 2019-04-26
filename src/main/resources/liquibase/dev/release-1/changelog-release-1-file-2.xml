@@ -13,4 +13,267 @@
 		</addColumn>
 	</changeSet>
 
+	<changeSet id="lq-con-2" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: dict_requests_category</comment>
+		<createTable tableName="dict_requests_category" schemaName="apps" remarks="Справочник категорий заявок">
+			<column name="code" type="varchar2(30)" remarks="Код категорий">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата изменения">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор изменения">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-3" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: dict_requests_category</comment>
+		<addPrimaryKey
+				columnNames="code"
+				constraintName="pk_dict_requests_category"
+				schemaName="apps"
+				tableName="dict_requests_category"/>
+	</changeSet>
+
+	<changeSet id="lq-con-4" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: dict_requests_category</comment>
+		<createTable tableName="dict_requests_category_tl" schemaName="apps" remarks="Справочник категорий заявок - перевод">
+			<column name="code" type="varchar2(30)" remarks="Код прввила">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar(10)" remarks="язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="name" type="varchar(200)" remarks="Наименование категорий">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата изменения">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор изменения">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-5" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: dict_requests_category_tl</comment>
+		<addPrimaryKey
+				columnNames="code, lang"
+				constraintName="pk_dict_requests_category_tl"
+				schemaName="apps"
+				tableName="dict_requests_category_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-con-6" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: dict_requests_category_tl to dict_requests_category</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="dict_requests_category_tl"
+				baseColumnNames="code"
+				constraintName="fk_dict_requests_category_tl_1"
+				deferrable="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_requests_category"
+				referencedColumnNames="code"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-7" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: dict_participant_roles</comment>
+		<createTable tableName="dict_participant_roles" schemaName="apps" remarks="Справочник роли участников">
+			<column name="code" type="varchar2(30)" remarks="Код категорий">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата изменения">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор изменения">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-8" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: dict_participant_roles</comment>
+		<addPrimaryKey
+				columnNames="code"
+				constraintName="pk_dict_participant_roles"
+				schemaName="apps"
+				tableName="dict_participant_roles"/>
+	</changeSet>
+
+	<changeSet id="lq-con-9" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: dict_participant_roles</comment>
+		<createTable tableName="dict_participant_roles_tl" schemaName="apps" remarks="Справочник роли участников - перевод">
+			<column name="code" type="varchar2(30)" remarks="Код роли">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar(10)" remarks="язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="name" type="varchar(200)" remarks="Наименование роли">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата изменения">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор изменения">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-10" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: dict_participant_roles_tl</comment>
+		<addPrimaryKey
+				columnNames="code, lang"
+				constraintName="pk_dict_participant_roles_tl"
+				schemaName="apps"
+				tableName="dict_participant_roles_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-con-11" logicalFilePath="path-independent" author="conor" context="dev">
+	<comment>Creating foreign constraint: dict_participant_roles_tl to dict_participant_roles</comment>
+	<addForeignKeyConstraint
+			baseTableSchemaName="apps"
+			baseTableName="dict_participant_roles_tl"
+			baseColumnNames="code"
+			constraintName="fk_dict_participant_roles_tl_1"
+			deferrable="true"
+			onDelete="CASCADE"
+			onUpdate="RESTRICT"
+			referencedTableSchemaName="apps"
+			referencedTableName="dict_participant_roles"
+			referencedColumnNames="code"/>
+	</changeSet>
+
+	<changeSet id="lq-con-12" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: DICT_SUPPORT_STAFF</comment>
+		<createTable tableName="DICT_SUPPORT_STAFF" remarks="Справочник - Сотрудники технической поддержки" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="code" type="varchar2(30)" remarks="Ссылка на Роль">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="user_id" type="number" remarks="Идентификатор пользователя">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-13" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: DICT_SUPPORT_STAFF</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_DICT_SUPPORT_STAFFl"
+				schemaName="apps"
+				tableName="DICT_SUPPORT_STAFF"/>
+	</changeSet>
+
+	<changeSet id="lq-con-14" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: DICT_SUPPORT_STAFF</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="DICT_SUPPORT_STAFF_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-con-15" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>creating unique constraint for table: DICT_SUPPORT_STAFF</comment>
+		<addUniqueConstraint
+				constraintName="un_DICT_SUPPORT_STAFF_1"
+				schemaName="apps"
+				tableName="DICT_SUPPORT_STAFF"
+				columnNames="code,user_id"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-16" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: DICT_SUPPORT_STAFF to adm_cfg.adm_users</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="DICT_SUPPORT_STAFF"
+				baseColumnNames="user_id"
+				constraintName="fk_DICT_SUPPORT_STAFF_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="adm_cfg.adm_users"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
 </databaseChangeLog>
