@@ -394,7 +394,7 @@
 				onUpdate="RESTRICT"
 				referencedTableSchemaName="apps"
 				referencedTableName="DICT_SUPPORT_STAFF"
-				referencedColumnNames="USER_ID"
+				referencedColumnNames="ID"
 		/>
 	</changeSet>
 
