@@ -3592,5 +3592,195 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-rus-217" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to fin_sale_plan_interface</comment>
+		<addColumn schemaName="apps"
+				   tableName="fin_sale_plan_interface">
+			<column name="plan_id" type="number" remarks="Ссылка на ид заголовка плана"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-218" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: fin_sale_plan_interface to plan_production_plans</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="fin_sale_plan_interface"
+				baseColumnNames="plan_id"
+				constraintName="fk_fin_sale_plan_interface_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="plan_production_plans"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-219" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to fin_sale_plan_interface</comment>
+		<addColumn schemaName="apps"
+				   tableName="fin_sale_plan_interface">
+			<column name="is_updated" type="number" remarks="Флаг - статус Прогнозов обновлен"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-220" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to fin_sale_plan_interface</comment>
+		<addColumn schemaName="apps"
+				   tableName="fin_sale_plan_interface">
+			<column name="plan_line_id" type="number" remarks="Идентификатор строки плана"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-221" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: fin_sale_plan_interface to plan_production_plans</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="fin_sale_plan_interface"
+				baseColumnNames="plan_line_id"
+				constraintName="fk_fin_sale_plan_interface_2"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="plan_production_plan_lines"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-222" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop foreign constraint: plan_production_plans</comment>
+		<dropForeignKeyConstraint baseTableName="plan_production_plans" constraintName="fk_plan_production_plans_52" baseTableSchemaName="apps"/>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-223" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: fin_sale_plan_interface to media_batch_statuses</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="plan_production_plans"
+				baseColumnNames="sap_state"
+				constraintName="fk_plan_production_plans_5"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="media_batch_statuses"
+				referencedColumnNames="code"
+		/>
+	</changeSet>
+    <changeSet id="lq-rus-225" logicalFilePath="path-independent" author="ruslan" context="dev">
+         <comment>call sql file</comment>
+         <sqlFile dbms="h2, oracle"
+                     encoding="utf8"
+                     endDelimiter=";"
+                     path="sql/res_daily_schedules_headers.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+         <rollback/>
+    </changeSet>
+
+    <changeSet id="lq-rus-226" logicalFilePath="path-independent" author="ruslan" context="dev">
+    	<comment>call sql file</comment>
+        <sqlFile dbms="h2, oracle"
+                     encoding="utf8"
+                     endDelimiter=";"
+                     path="sql/res_daily_schedules_lines.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        <rollback/>
+    </changeSet>
+
+    <changeSet id="lq-rus-227" logicalFilePath="path-independent" author="ruslan" context="dev">
+    	<comment>call sql file</comment>
+        <sqlFile dbms="h2, oracle"
+                     encoding="utf8"
+                     endDelimiter=";"
+                     path="sql/res_daily_schedules_sublines.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        <rollback/>
+    </changeSet>
+
+    <changeSet id="lq-rus-228" logicalFilePath="path-independent" author="ruslan" context="dev">
+    	<comment>call sql file</comment>
+        <sqlFile dbms="h2, oracle"
+                     encoding="utf8"
+                     endDelimiter=";"
+                     path="sql/res_transfer_to_bems_codes.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        <rollback/>
+    </changeSet>
+
+    <changeSet id="lq-rus-229" logicalFilePath="path-independent" author="ruslan" context="dev">
+    	<comment>call sql file</comment>
+        <sqlFile dbms="h2, oracle"
+                     encoding="utf8"
+                     endDelimiter=";"
+                     path="sql/res_transfer_to_bems_codes_tl.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        <rollback/>
+    </changeSet>
+
+    <changeSet id="lq-rus-230" logicalFilePath="path-independent" author="ruslan" context="dev">
+    	<comment>call sql file</comment>
+        <sqlFile dbms="h2, oracle"
+                     encoding="utf8"
+                     endDelimiter=";"
+                     path="sql/res_daily_schedules_files.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        <rollback/>
+    </changeSet>
+
+	<changeSet id="lq-rus-231" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: res_daily_schedules_headers</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="res_daily_schedules_headers_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-232" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: res_daily_schedules_lines</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="RES_DAILY_SCHEDULES_LINES_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-233" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: res_daily_schedules_lines</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="res_daily_schedules_files_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-234" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/res_daily_schedules_lines_v.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
 
 </databaseChangeLog>
