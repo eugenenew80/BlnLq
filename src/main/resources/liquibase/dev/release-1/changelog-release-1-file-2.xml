@@ -365,6 +365,118 @@
 	</changeSet>
 
 	<changeSet id="lq-con-19" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>drop table SUPPORT_REQUESTS</comment>
+		<dropTable cascadeConstraints="true"
+				   schemaName="apps"
+				   tableName="SUPPORT_REQUESTS"/>
+	</changeSet>
+
+	<changeSet id="lq-con-20" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: ITSM_SUPPORT_REQUESTS</comment>
+		<createTable tableName="ITSM_SUPPORT_REQUESTS" remarks="Заявки технической поддержки" schemaName="apps">
+
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="req_number" type="number" remarks="Номер заявки">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="sending_date" type="TIMESTAMP" remarks="Дата отправки заявки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="req_category" type="varchar2(30)" remarks="Категория заявки">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="theme" type="varchar2(30)" remarks="Тема заявки">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="appeal_text" type="varchar2(2000)" remarks="Текст обращения">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="contacts" type="varchar2(500)" remarks="Контакты">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="bp_id" type="number" remarks="Ид бизнес-партнера">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="sender_status" type="varchar2(30)" remarks="Статус отправителя">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="executor_status" type="varchar2(30)" remarks="Статус исполнителя">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="response_text" type="varchar2(2000)" remarks="Текст ответа">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="executor_id" type="number" remarks="Исполнитель">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="closing_date" type="TIMESTAMP" remarks="Дата закрытия заявки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="rejection_reason" type="varchar2(30)" remarks="Причина отклонения/закрытия заявки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="rejection_date" type="TIMESTAMP" remarks="Дата отклонения/закрытия заявки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="rejection_author" type="number" remarks="Автор отклонения/закрытия заявки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-21" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: ITSM_SUPPORT_REQUESTS</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_ITSM_SUPPORT_REQUESTSl"
+				schemaName="apps"
+				tableName="ITSM_SUPPORT_REQUESTS"/>
+	</changeSet>
+
+	<changeSet id="lq-con-22" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: ITSM_SUPPORT_REQUESTS</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="ITSM_SUPPORT_REQUESTS_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-con-23" logicalFilePath="path-independent" author="conor" context="dev">
 		<comment>Creating foreign constraint: ITSM_SUPPORT_REQUESTS to DICT_REQUESTS_CATEGORY</comment>
 		<addForeignKeyConstraint
 				baseTableSchemaName="apps"
@@ -381,7 +493,7 @@
 		/>
 	</changeSet>
 
-	<changeSet id="lq-con-20" logicalFilePath="path-independent" author="conor" context="dev">
+	<changeSet id="lq-con-24" logicalFilePath="path-independent" author="conor" context="dev">
 		<comment>Creating foreign constraint: ITSM_SUPPORT_REQUESTS to DICT_SUPPORT_STAFF</comment>
 		<addForeignKeyConstraint
 				baseTableSchemaName="apps"
