@@ -364,4 +364,38 @@
 				startValue="1"/>
 	</changeSet>
 
+	<changeSet id="lq-con-19" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: ITSM_SUPPORT_REQUESTS to DICT_REQUESTS_CATEGORY</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="ITSM_SUPPORT_REQUESTS"
+				baseColumnNames="req_category"
+				constraintName="fk_ITSM_SUPPORT_REQUESTS_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="DICT_REQUESTS_CATEGORY"
+				referencedColumnNames="CODE"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-20" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: ITSM_SUPPORT_REQUESTS to DICT_SUPPORT_STAFF</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="ITSM_SUPPORT_REQUESTS"
+				baseColumnNames="executor_id"
+				constraintName="fk_ITSM_SUPPORT_REQUESTS_2"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="DICT_SUPPORT_STAFF"
+				referencedColumnNames="USER_ID"
+		/>
+	</changeSet>
+
 </databaseChangeLog>
