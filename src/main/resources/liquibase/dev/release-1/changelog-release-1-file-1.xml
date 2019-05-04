@@ -4019,4 +4019,15 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-rus-248" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Change column in table fin_receipt_applications</comment>
+		<modifyDataType
+				tableName="fin_receipt_applications"
+				schemaName="apps"
+				columnName="external_contract_num"
+				newDataType="varchar2(100)"
+		/>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
