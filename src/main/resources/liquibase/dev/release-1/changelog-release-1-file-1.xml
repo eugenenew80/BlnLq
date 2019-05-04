@@ -3783,4 +3783,240 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-rus-235" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: cm_doc_keg_cte_es_platform</comment>
+		<createTable tableName="cm_doc_keg_cte_es_platform" remarks="Электростанции-площадки в привязке к Договорам" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="contract_id" type="number" remarks="Идентификатор Договора">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="order_num" type="number" remarks="Порядок вывода">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="cadastral_number" type="varchar2(500)" remarks="Кадастровый номер">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="total_area" type="number" remarks="Общая площадь">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="area_unit_id" type="number" remarks="Ед. измерения площади">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="power" type="number" remarks="Суммарно установленная мощность">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="power_unit_id" type="number" remarks="Ед. измерения мощности">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="coff_power_use" type="number" remarks="Прогнозный коэффициент использования установленной мощности электростанции">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="start_date" type="date" remarks="Дата ввода в эксплуатацию">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="end_date" type="date" remarks="Дата вывода из эксплуатации">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-236" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: cm_doc_keg_cte_es_platform</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_cm_doc_keg_cte_es_platform"
+				schemaName="apps"
+				tableName="cm_doc_keg_cte_es_platform"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-237" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: mdfem_history_tl</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="cm_doc_keg_cte_es_platform_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-238" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: cm_doc_keg_cte_es_platform to cm_doc_keg_cte</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="cm_doc_keg_cte_es_platform"
+				baseColumnNames="contract_id"
+				constraintName="fk_cm_doc_keg_cte_es_platform_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="cm_doc_keg_cte"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-239" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: cm_doc_keg_cte_es_platform to dict_units</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="cm_doc_keg_cte_es_platform"
+				baseColumnNames="area_unit_id"
+				constraintName="fk_cm_doc_keg_cte_es_platform_2"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_units"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-240" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: cm_doc_keg_cte_es_platform to dict_units</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="cm_doc_keg_cte_es_platform"
+				baseColumnNames="power_unit_id"
+				constraintName="fk_cm_doc_keg_cte_es_platform_4"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_units"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-241" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: cm_doc_keg_cte_es_platform_tl</comment>
+		<createTable tableName="cm_doc_keg_cte_es_platform_tl" remarks="Электростанции-площадки Перевод" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar2(10)" remarks="Язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="platform_id" type="number" remarks="Ссылка на родительскую запись">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="name" type="varchar2(500)" remarks="Наименование площадки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-242" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: cm_doc_keg_cte_es_platform_tl</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_cm_doc_keg_cte_es_platform_tl"
+				schemaName="apps"
+				tableName="cm_doc_keg_cte_es_platform_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-243" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: cm_doc_keg_cte_es_platform_tl</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="cm_doc_keg_cte_es_platform_tl_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-244" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>creating unique constraint for table: cm_doc_keg_cte_es_platform_tl</comment>
+		<addUniqueConstraint
+				constraintName="un_cm_doc_keg_cte_es_platform_tl_1"
+				schemaName="apps"
+				tableName="cm_doc_keg_cte_es_platform_tl"
+				columnNames="platform_id, lang"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-245" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: cm_doc_keg_cte_es_platform_tl to cm_doc_keg_cte_es_platform</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="cm_doc_keg_cte_es_platform_tl"
+				baseColumnNames="platform_id"
+				constraintName="fk_cm_doc_keg_cte_es_platform_tl_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="cm_doc_keg_cte_es_platform"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-246" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column to fin_debt_interface</comment>
+		<addColumn schemaName="apps"
+				   tableName="fin_debt_interface">
+			<column name="message" type="varchar2(200)" remarks="Текстовое сообщение"/>
+		</addColumn>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-247" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop not null constraint fin_receipt_applications</comment>
+		<dropNotNullConstraint columnDataType="number"
+							   columnName="exchange_rate"
+							   schemaName="apps"
+							   tableName="fin_receipt_applications"/>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
