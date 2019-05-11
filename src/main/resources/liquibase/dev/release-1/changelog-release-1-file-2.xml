@@ -510,4 +510,72 @@
 		/>
 	</changeSet>
 
+	<changeSet id="lq-con-25" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="SENDING_DATE"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-26" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="SENDER_STATUS"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-27" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="EXECUTOR_STATUS"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-28" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column ITSM_SUPPORT_REQUESTS</comment>
+		<addColumn schemaName="apps" tableName="ITSM_SUPPORT_REQUESTS">
+			<column name="STATUS" type="varchar2(30)" remarks="Статус">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-29" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: ITSM_SUPPORT_REQUESTS to WF_STATES</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="ITSM_SUPPORT_REQUESTS"
+				baseColumnNames="STATUS"
+				constraintName="fk_ITSM_SUPPORT_REQUESTS_3"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="WF_STATES"
+				referencedColumnNames="CODE"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-30" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: ITSM_SUPPORT_REQUESTS to DICT_BUSINESS_PARTNERS</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="ITSM_SUPPORT_REQUESTS"
+				baseColumnNames="BP_ID"
+				constraintName="fk_ITSM_SUPPORT_REQUESTS_4"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="DICT_BUSINESS_PARTNERS"
+				referencedColumnNames="ID"
+		/>
+	</changeSet>
+
+
 </databaseChangeLog>
