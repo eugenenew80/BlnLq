@@ -4030,4 +4030,27 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-rus-249" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Change column in table fin_receipt_applications</comment>
+		<modifyDataType
+				tableName="fin_sale_invoices"
+				schemaName="apps"
+				columnName="esf_doc_num"
+				newDataType="varchar2(40)"
+		/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-250" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns calc_service_values_reconciliations</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add comments to the columns
+			comment on column APPS.calc_service_values_reconciliations.is_current_record
+			is 'Активированная запись';
+
+			comment on column APPS.calc_service_values_reconciliations.is_active
+			is 'Передан в подсистему "Финансы';
+		</sql>
+		<rollback/>
+	</changeSet>
 </databaseChangeLog>
