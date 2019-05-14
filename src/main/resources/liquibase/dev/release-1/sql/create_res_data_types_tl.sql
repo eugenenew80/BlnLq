@@ -1,6 +1,6 @@
-drop table RES_DATA_TYPES_TL cascade constraints;
+drop table APPS.RES_DATA_TYPES_TL cascade constraints;
 -- Create table
-create table RES_DATA_TYPES_TL
+create table APPS.RES_DATA_TYPES_TL
 (
   code             VARCHAR2(20 CHAR) not null,
   lang             VARCHAR2(10 CHAR) not null,
@@ -21,28 +21,28 @@ tablespace USERS
     minextents 1
     maxextents unlimited
   );
--- Add comments to the table 
-comment on table RES_DATA_TYPES_TL
+-- Add comments to the table
+comment on table APPS.RES_DATA_TYPES_TL
   is 'Переводы видов расчета ТОО РФЦ';
--- Add comments to the columns 
-comment on column RES_DATA_TYPES_TL.code
+-- Add comments to the columns
+comment on column APPS.RES_DATA_TYPES_TL.code
   is 'Код расчета';
-comment on column RES_DATA_TYPES_TL.lang
+comment on column APPS.RES_DATA_TYPES_TL.lang
   is 'Язык';
-comment on column RES_DATA_TYPES_TL.name
+comment on column APPS.RES_DATA_TYPES_TL.name
   is 'Наименование вида расчета';
-comment on column RES_DATA_TYPES_TL.create_date
+comment on column APPS.RES_DATA_TYPES_TL.create_date
   is 'Дата создания';
-comment on column RES_DATA_TYPES_TL.last_update_date
+comment on column APPS.RES_DATA_TYPES_TL.last_update_date
   is 'Дата изменения';
-comment on column RES_DATA_TYPES_TL.create_by
+comment on column APPS.RES_DATA_TYPES_TL.create_by
   is 'Автор';
-comment on column RES_DATA_TYPES_TL.last_update_by
+comment on column APPS.RES_DATA_TYPES_TL.last_update_by
   is 'Автор изменения';
--- Create/Recreate primary, unique and foreign key constraints 
-alter table RES_DATA_TYPES_TL
+-- Create/Recreate primary, unique and foreign key constraints
+alter table APPS.RES_DATA_TYPES_TL
   add constraint PK_RES_DATA_TYPES_TL primary key (CODE, LANG)
-  using index 
+  using index
   tablespace USERS
   pctfree 10
   initrans 2
@@ -53,7 +53,7 @@ alter table RES_DATA_TYPES_TL
     minextents 1
     maxextents unlimited
   );
-alter table RES_DATA_TYPES_TL
+alter table APPS.RES_DATA_TYPES_TL
   add constraint FK_RES_DATA_TYPES_TL_1 foreign key (CODE)
-  references RES_DATA_TYPES (CODE) on delete cascade
+  references APPS.RES_DATA_TYPES (CODE) on delete cascade
   deferrable;

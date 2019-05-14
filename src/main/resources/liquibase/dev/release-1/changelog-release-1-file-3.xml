@@ -64,4 +64,52 @@
 				 stripComments="true"/>
 		<rollback/>
 	</changeSet>
+
+	<changeSet id="lq-rus-258" logicalFilePath="path-independent" author="ruslan" context="dev">
+			<comment>call sql file</comment>
+			<sqlFile dbms="h2, oracle"
+					 encoding="utf8"
+					 endDelimiter=";"
+					 path="sql/create_res_data_types.sql"
+					 relativeToChangelogFile="true"
+					 splitStatements="true"
+					 stripComments="true"/>
+			<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-259" logicalFilePath="path-independent" author="ruslan" context="dev">
+			<comment>call sql file</comment>
+			<sqlFile dbms="h2, oracle"
+					 encoding="utf8"
+					 endDelimiter=";"
+					 path="sql/create_res_data_types_tl.sql"
+					 relativeToChangelogFile="true"
+					 splitStatements="true"
+					 stripComments="true"/>
+			<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-260" logicalFilePath="path-independent" author="ruslan" context="dev">
+			<comment>call sql file</comment>
+			<sqlFile dbms="h2, oracle"
+					 encoding="utf8"
+					 endDelimiter=";"
+					 path="sql/insert_res_data_types.sql"
+					 relativeToChangelogFile="true"
+					 splitStatements="true"
+					 stripComments="true"/>
+			<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-261" logicalFilePath="path-independent" author="ruslan" context="dev">
+			<comment>call sql file</comment>
+			<sqlFile dbms="h2, oracle"
+					 encoding="utf8"
+					 endDelimiter=";"
+					 path="sql/insert_res_data_types_tl.sql"
+					 relativeToChangelogFile="true"
+					 splitStatements="true"
+					 stripComments="true"/>
+			<rollback/>
+	</changeSet>
 </databaseChangeLog>
