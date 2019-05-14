@@ -1,5 +1,5 @@
 -- Create sequence 
-create sequence RES_MONTHLY_CALC_HEADER_S
+create sequence apps.RES_MONTHLY_CALC_HEADER_S
 minvalue 1
 maxvalue 999999999999999
 start with 1

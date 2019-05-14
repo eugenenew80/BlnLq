@@ -1,6 +1,6 @@
-drop table RES_MONTHLY_CALC_HEADERS cascade constraints;
+drop table apps.RES_MONTHLY_CALC_HEADERS cascade constraints;
 -- Create table
-create table RES_MONTHLY_CALC_HEADERS
+create table apps.RES_MONTHLY_CALC_HEADERS
 (
   id               NUMBER not null,
   period_id        NUMBER not null,
@@ -24,31 +24,31 @@ tablespace USERS
     maxextents unlimited
   );
 -- Add comments to the table 
-comment on table RES_MONTHLY_CALC_HEADERS
+comment on table apps.RES_MONTHLY_CALC_HEADERS
   is 'Заголовки расчетов ТОО РФЦ за месяц';
 -- Add comments to the columns 
-comment on column RES_MONTHLY_CALC_HEADERS.id
+comment on column apps.RES_MONTHLY_CALC_HEADERS.id
   is 'Идентификатор расчета';
-comment on column RES_MONTHLY_CALC_HEADERS.period_id
+comment on column apps.RES_MONTHLY_CALC_HEADERS.period_id
   is 'Идентификатиор расчетного периода';
-comment on column RES_MONTHLY_CALC_HEADERS.calc_type_code
+comment on column apps.RES_MONTHLY_CALC_HEADERS.calc_type_code
   is 'Вид расчета';
-comment on column RES_MONTHLY_CALC_HEADERS.unit_id
+comment on column apps.RES_MONTHLY_CALC_HEADERS.unit_id
   is 'Идентификатор единицы измерения';
-comment on column RES_MONTHLY_CALC_HEADERS.copied_from_id
+comment on column apps.RES_MONTHLY_CALC_HEADERS.copied_from_id
   is 'Скопировано из';
-comment on column RES_MONTHLY_CALC_HEADERS.state
+comment on column apps.RES_MONTHLY_CALC_HEADERS.state
   is 'Статус согласования';
-comment on column RES_MONTHLY_CALC_HEADERS.create_by
+comment on column apps.RES_MONTHLY_CALC_HEADERS.create_by
   is 'Автор записи';
-comment on column RES_MONTHLY_CALC_HEADERS.create_date
+comment on column apps.RES_MONTHLY_CALC_HEADERS.create_date
   is 'Дата и время создания записи';
-comment on column RES_MONTHLY_CALC_HEADERS.last_update_by
+comment on column apps.RES_MONTHLY_CALC_HEADERS.last_update_by
   is 'Автор последнего изменения';
-comment on column RES_MONTHLY_CALC_HEADERS.last_update_date
+comment on column apps.RES_MONTHLY_CALC_HEADERS.last_update_date
   is 'Дата и время изменения записи';
 -- Create/Recreate primary, unique and foreign key constraints 
-alter table RES_MONTHLY_CALC_HEADERS
+alter table apps.RES_MONTHLY_CALC_HEADERS
   add constraint PK_RES_MONTHLY_CALC_HEADERS primary key (ID)
   deferrable initially deferred
   using index 
@@ -56,23 +56,23 @@ alter table RES_MONTHLY_CALC_HEADERS
   pctfree 10
   initrans 2
   maxtrans 255;
-alter table RES_MONTHLY_CALC_HEADERS
+alter table apps.RES_MONTHLY_CALC_HEADERS
   add constraint FK_RES_MONTHLY_CALC_HEADERS_1 foreign key (PERIOD_ID)
-  references FIN_PERIODS (ID)
+  references apps.FIN_PERIODS (ID)
   deferrable initially deferred;
-alter table RES_MONTHLY_CALC_HEADERS
+alter table apps.RES_MONTHLY_CALC_HEADERS
   add constraint FK_RES_MONTHLY_CALC_HEADERS_2 foreign key (CALC_TYPE_CODE)
-  references CALC_DATA_TYPES (CODE)
+  references apps.CALC_DATA_TYPES (CODE)
   deferrable initially deferred;
-alter table RES_MONTHLY_CALC_HEADERS
+alter table apps.RES_MONTHLY_CALC_HEADERS
   add constraint FK_RES_MONTHLY_CALC_HEADERS_3 foreign key (UNIT_ID)
-  references DICT_UNITS (ID)
+  references apps.DICT_UNITS (ID)
   deferrable initially deferred;
-alter table RES_MONTHLY_CALC_HEADERS
+alter table apps.RES_MONTHLY_CALC_HEADERS
   add constraint FK_RES_MONTHLY_CALC_HEADERS_4 foreign key (COPIED_FROM_ID)
-  references RES_MONTHLY_CALC_HEADERS (ID)
+  references apps.RES_MONTHLY_CALC_HEADERS (ID)
   deferrable initially deferred;
-alter table RES_MONTHLY_CALC_HEADERS
+alter table apps.RES_MONTHLY_CALC_HEADERS
   add constraint FK_RES_MONTHLY_CALC_HEADERS_5 foreign key (STATE)
-  references WF_STATES (CODE)
+  references apps.WF_STATES (CODE)
   deferrable initially deferred;

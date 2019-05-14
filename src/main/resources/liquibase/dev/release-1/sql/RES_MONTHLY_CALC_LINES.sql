@@ -1,6 +1,6 @@
-drop table RES_MONTHLY_CALC_LINES cascade constraints;
+drop table apps.RES_MONTHLY_CALC_LINES cascade constraints;
 -- Create table
-create table RES_MONTHLY_CALC_LINES
+create table apps.RES_MONTHLY_CALC_LINES
 (
   id                   NUMBER not null,
   header_id            NUMBER not null,
@@ -28,39 +28,39 @@ tablespace USERS
     maxextents unlimited
   );
 -- Add comments to the table 
-comment on table RES_MONTHLY_CALC_LINES
+comment on table apps.RES_MONTHLY_CALC_LINES
   is 'Строки расчетов ТОО РФЦ за месяц';
 -- Add comments to the columns 
-comment on column RES_MONTHLY_CALC_LINES.id
+comment on column apps.RES_MONTHLY_CALC_LINES.id
   is 'Идентификатор строки';
-comment on column RES_MONTHLY_CALC_LINES.header_id
+comment on column apps.RES_MONTHLY_CALC_LINES.header_id
   is 'Идентификатор заголовка расчета';
-comment on column RES_MONTHLY_CALC_LINES.tab_page_code
+comment on column apps.RES_MONTHLY_CALC_LINES.tab_page_code
   is 'Идентификатор вкладки: PURCHASE - покупка от ВИЭ, MIDDLE - отпуск в сеть УП, SALE - Продажа УП';
-comment on column RES_MONTHLY_CALC_LINES.contract_id
+comment on column apps.RES_MONTHLY_CALC_LINES.contract_id
   is 'Идентификатор договора';
-comment on column RES_MONTHLY_CALC_LINES.countrparty_id
+comment on column apps.RES_MONTHLY_CALC_LINES.countrparty_id
   is 'Идентификатор контрагента';
-comment on column RES_MONTHLY_CALC_LINES.energy_source_id
+comment on column apps.RES_MONTHLY_CALC_LINES.energy_source_id
   is 'Идентификатор электростанции';
-comment on column RES_MONTHLY_CALC_LINES.energy_group_id
+comment on column apps.RES_MONTHLY_CALC_LINES.energy_group_id
   is 'Идентификатор группы электростанций';
-comment on column RES_MONTHLY_CALC_LINES.amount
+comment on column apps.RES_MONTHLY_CALC_LINES.amount
   is 'Объем электроэнергии';
-comment on column RES_MONTHLY_CALC_LINES.is_fixed
+comment on column apps.RES_MONTHLY_CALC_LINES.is_fixed
   is 'Зафиксировано от изменений (логическое поле)';
-comment on column RES_MONTHLY_CALC_LINES.transfer_to_fin_date
+comment on column apps.RES_MONTHLY_CALC_LINES.transfer_to_fin_date
   is 'Дата отправки в подсистему Финансы';
-comment on column RES_MONTHLY_CALC_LINES.create_by
+comment on column apps.RES_MONTHLY_CALC_LINES.create_by
   is 'Автор записи';
-comment on column RES_MONTHLY_CALC_LINES.create_date
+comment on column apps.RES_MONTHLY_CALC_LINES.create_date
   is 'Дата и время создания записи';
-comment on column RES_MONTHLY_CALC_LINES.last_update_by
+comment on column apps.RES_MONTHLY_CALC_LINES.last_update_by
   is 'Автор последнего изменения';
-comment on column RES_MONTHLY_CALC_LINES.last_update_date
+comment on column apps.RES_MONTHLY_CALC_LINES.last_update_date
   is 'Дата и время изменения записи';
 -- Create/Recreate primary, unique and foreign key constraints 
-alter table RES_MONTHLY_CALC_LINES
+alter table apps.RES_MONTHLY_CALC_LINES
   add constraint PK_RES_MONTHLY_CALC_LINES primary key (ID)
   deferrable initially deferred
   using index 
@@ -68,23 +68,23 @@ alter table RES_MONTHLY_CALC_LINES
   pctfree 10
   initrans 2
   maxtrans 255;
-alter table RES_MONTHLY_CALC_LINES
+alter table apps.RES_MONTHLY_CALC_LINES
   add constraint FK_RES_MONTHLY_CALC_LINES_1 foreign key (HEADER_ID)
-  references RES_MONTHLY_CALC_HEADERS (ID) on delete cascade
+  references apps.RES_MONTHLY_CALC_HEADERS (ID) on delete cascade
   deferrable initially deferred;
-alter table RES_MONTHLY_CALC_LINES
+alter table apps.RES_MONTHLY_CALC_LINES
   add constraint FK_RES_MONTHLY_CALC_LINES_2 foreign key (CONTRACT_ID)
-  references CM_DOC_KEG_CTE (ID)
+  references apps.CM_DOC_KEG_CTE (ID)
   deferrable initially deferred;
-alter table RES_MONTHLY_CALC_LINES
+alter table apps.RES_MONTHLY_CALC_LINES
   add constraint FK_RES_MONTHLY_CALC_LINES_3 foreign key (COUNTRPARTY_ID)
-  references DICT_BUSINESS_PARTNERS (ID)
+  references apps.DICT_BUSINESS_PARTNERS (ID)
   deferrable initially deferred;
-alter table RES_MONTHLY_CALC_LINES
+alter table apps.RES_MONTHLY_CALC_LINES
   add constraint FK_RES_MONTHLY_CALC_LINES_4 foreign key (ENERGY_SOURCE_ID)
-  references DICT_ENERGY_SOURCES (ID)
+  references apps.DICT_ENERGY_SOURCES (ID)
   deferrable initially deferred;
-alter table RES_MONTHLY_CALC_LINES
+alter table apps.RES_MONTHLY_CALC_LINES
   add constraint FK_RES_MONTHLY_CALC_LINES_5 foreign key (ENERGY_GROUP_ID)
-  references CALC_ELECTRICITY_PRODUCER_GROUPS (ID)
+  references apps.CALC_ELECTRICITY_PRODUCER_GROUPS (ID)
   deferrable initially deferred;
