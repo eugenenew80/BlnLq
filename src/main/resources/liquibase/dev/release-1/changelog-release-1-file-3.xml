@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+	<changeSet id="lq-rus-253" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/RES_MONTHLY_CALC_HEADER_S.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-254" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/RES_MONTHLY_CALC_LINES_S.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-255" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/RES_MONTHLY_CALC_HEADER.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-256" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/RES_MONTHLY_CALC_LINES.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-257" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/ALTER_RES_MONTHLY_CALC_HEADERS.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-258" logicalFilePath="path-independent" author="ruslan" context="dev">
+			<comment>call sql file</comment>
+			<sqlFile dbms="h2, oracle"
+					 encoding="utf8"
+					 endDelimiter=";"
+					 path="sql/create_res_data_types.sql"
+					 relativeToChangelogFile="true"
+					 splitStatements="true"
+					 stripComments="true"/>
+			<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-259" logicalFilePath="path-independent" author="ruslan" context="dev">
+			<comment>call sql file</comment>
+			<sqlFile dbms="h2, oracle"
+					 encoding="utf8"
+					 endDelimiter=";"
+					 path="sql/create_res_data_types_tl.sql"
+					 relativeToChangelogFile="true"
+					 splitStatements="true"
+					 stripComments="true"/>
+			<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-260" logicalFilePath="path-independent" author="ruslan" context="dev">
+			<comment>call sql file</comment>
+			<sqlFile dbms="h2, oracle"
+					 encoding="utf8"
+					 endDelimiter=";"
+					 path="sql/insert_res_data_types.sql"
+					 relativeToChangelogFile="true"
+					 splitStatements="true"
+					 stripComments="true"/>
+			<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-261" logicalFilePath="path-independent" author="ruslan" context="dev">
+			<comment>call sql file</comment>
+			<sqlFile dbms="h2, oracle"
+					 encoding="utf8"
+					 endDelimiter=";"
+					 path="sql/insert_res_data_types_tl.sql"
+					 relativeToChangelogFile="true"
+					 splitStatements="true"
+					 stripComments="true"/>
+			<rollback/>
+	</changeSet>
+</databaseChangeLog>
