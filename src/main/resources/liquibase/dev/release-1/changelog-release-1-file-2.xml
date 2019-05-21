@@ -577,5 +577,55 @@
 		/>
 	</changeSet>
 
+	<changeSet id="lq-con-31" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="APPEAL_TEXT"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-32" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column ITSM_SUPPORT_REQUESTS</comment>
+		<addColumn schemaName="apps" tableName="ITSM_SUPPORT_REQUESTS">
+			<column name="APPEAL_TEXT" type="CLOB" remarks="Текст обращения">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-33" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="RESPONSE_TEXT"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-34" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column ITSM_SUPPORT_REQUESTS</comment>
+		<addColumn schemaName="apps" tableName="ITSM_SUPPORT_REQUESTS">
+			<column name="RESPONSE_TEXT" type="CLOB" remarks="Текст ответа">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-35" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="REJECTION_REASON"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-36" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column ITSM_SUPPORT_REQUESTS</comment>
+		<addColumn schemaName="apps" tableName="ITSM_SUPPORT_REQUESTS">
+			<column name="REJECTION_REASON" type="CLOB" remarks="Причина отклонения/закрытия заявки">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
 
 </databaseChangeLog>
