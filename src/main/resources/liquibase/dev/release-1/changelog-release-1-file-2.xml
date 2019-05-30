@@ -628,4 +628,13 @@
 		</addColumn>
 	</changeSet>
 
+	<changeSet id="lq-con-37" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column WF_ROUTE_USERS</comment>
+		<addColumn schemaName="apps" tableName="WF_ROUTE_USERS">
+			<column name="ORDER_NUM" type="NUMBER" remarks="Порядковый номер">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
 </databaseChangeLog>
