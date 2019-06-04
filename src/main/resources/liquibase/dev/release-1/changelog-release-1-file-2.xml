@@ -646,25 +646,4 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet id="lq-con-39" logicalFilePath="path-independent" author="conor" context="dev">
-		<comment>Creating primary key for table: adm_users</comment>
-		<addPrimaryKey
-				columnNames="id"
-				constraintName="pk_adm_users"
-				schemaName="adm_cfg"
-				tableName="adm_users"/>
-	</changeSet>
-
-	<changeSet id="lq-con-40" logicalFilePath="path-independent" author="conor" context="dev">
-		<comment>creating unique constraint for table: adm_users</comment>
-		<addUniqueConstraint
-				constraintName="un_adm_users_1"
-				schemaName="adm_cfg"
-				tableName="adm_users"
-				columnNames="user_name"
-				deferrable="true"
-				initiallyDeferred="true"
-		/>
-	</changeSet>
-
 </databaseChangeLog>
