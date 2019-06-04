@@ -628,13 +628,43 @@
 		</addColumn>
 	</changeSet>
 
-	<changeSet id="lq-con-37" logicalFilePath="path-independent" author="conor" context="dev">
+<!--	<changeSet id="lq-con-37" logicalFilePath="path-independent" author="conor" context="dev">
 		<comment>add column WF_ROUTE_USERS</comment>
 		<addColumn schemaName="apps" tableName="WF_ROUTE_USERS">
 			<column name="ORDER_NUM" type="NUMBER" remarks="Порядковый номер">
 				<constraints nullable="true"/>
 			</column>
 		</addColumn>
+	</changeSet>-->
+
+	<changeSet id="lq-con-38" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column CALC_BS_RESULT_HEADERS</comment>
+		<addColumn schemaName="apps" tableName="CALC_BS_RESULT_HEADERS">
+			<column name="ORDER_NUMBER_AND_DATE" type="varchar2(200)" remarks="Номер и дата приказа о составе комиссии">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-39" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: adm_users</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_adm_users"
+				schemaName="adm_cfg"
+				tableName="adm_users"/>
+	</changeSet>
+
+	<changeSet id="lq-con-40" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>creating unique constraint for table: adm_users</comment>
+		<addUniqueConstraint
+				constraintName="un_adm_users_1"
+				schemaName="adm_cfg"
+				tableName="adm_users"
+				columnNames="user_name"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
 	</changeSet>
 
 </databaseChangeLog>
