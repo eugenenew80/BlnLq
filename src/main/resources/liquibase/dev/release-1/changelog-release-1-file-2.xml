@@ -646,4 +646,20 @@
 		</addColumn>
 	</changeSet>
 
+	<changeSet id="lq-con-39" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: CM_DOC_KEG_CTE_A4L to CM_DOC_AWLM_ITEM_TYPES</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="CM_DOC_KEG_CTE_A4L"
+				baseColumnNames="ITEM_TYPE"
+				constraintName="CM_DOC_KEG_CTE_A4L_FK11"
+				deferrable="true"
+				onDelete="NO ACTION"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="CM_DOC_AWLM_ITEM_TYPES"
+				referencedColumnNames="CODE"
+		/>
+	</changeSet>
+
 </databaseChangeLog>
