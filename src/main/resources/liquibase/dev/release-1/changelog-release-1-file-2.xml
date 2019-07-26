@@ -662,4 +662,12 @@
 		/>
 	</changeSet>
 
+	<changeSet id="lq-con-40" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column to res_monthly_calc_headers</comment>
+		<addColumn schemaName="apps"
+				   tableName="res_monthly_calc_headers">
+			<column name="transfer_to_fin_date" type="timestamp" remarks="Дата передачи в ПФ"/>
+		</addColumn>
+	</changeSet>
+
 </databaseChangeLog>
