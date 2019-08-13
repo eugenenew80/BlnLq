@@ -182,18 +182,18 @@
 	</changeSet>
 
 	<changeSet id="lq-con-11" logicalFilePath="path-independent" author="conor" context="dev">
-	<comment>Creating foreign constraint: dict_participant_roles_tl to dict_participant_roles</comment>
-	<addForeignKeyConstraint
-			baseTableSchemaName="apps"
-			baseTableName="dict_participant_roles_tl"
-			baseColumnNames="code"
-			constraintName="fk_dict_participant_roles_tl_1"
-			deferrable="true"
-			onDelete="CASCADE"
-			onUpdate="RESTRICT"
-			referencedTableSchemaName="apps"
-			referencedTableName="dict_participant_roles"
-			referencedColumnNames="code"/>
+		<comment>Creating foreign constraint: dict_participant_roles_tl to dict_participant_roles</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="dict_participant_roles_tl"
+				baseColumnNames="code"
+				constraintName="fk_dict_participant_roles_tl_1"
+				deferrable="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_participant_roles"
+				referencedColumnNames="code"/>
 	</changeSet>
 
 	<changeSet id="lq-con-12" logicalFilePath="path-independent" author="conor" context="dev">
@@ -507,6 +507,283 @@
 				referencedTableSchemaName="apps"
 				referencedTableName="DICT_SUPPORT_STAFF"
 				referencedColumnNames="ID"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-25" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="SENDING_DATE"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-26" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="SENDER_STATUS"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-27" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="EXECUTOR_STATUS"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-28" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column ITSM_SUPPORT_REQUESTS</comment>
+		<addColumn schemaName="apps" tableName="ITSM_SUPPORT_REQUESTS">
+			<column name="STATUS" type="varchar2(30)" remarks="Статус">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-29" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: ITSM_SUPPORT_REQUESTS to WF_STATES</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="ITSM_SUPPORT_REQUESTS"
+				baseColumnNames="STATUS"
+				constraintName="fk_ITSM_SUPPORT_REQUESTS_3"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="WF_STATES"
+				referencedColumnNames="CODE"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-30" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: ITSM_SUPPORT_REQUESTS to DICT_BUSINESS_PARTNERS</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="ITSM_SUPPORT_REQUESTS"
+				baseColumnNames="BP_ID"
+				constraintName="fk_ITSM_SUPPORT_REQUESTS_4"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="DICT_BUSINESS_PARTNERS"
+				referencedColumnNames="ID"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-31" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="APPEAL_TEXT"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-32" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column ITSM_SUPPORT_REQUESTS</comment>
+		<addColumn schemaName="apps" tableName="ITSM_SUPPORT_REQUESTS">
+			<column name="APPEAL_TEXT" type="CLOB" remarks="Текст обращения">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-33" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="RESPONSE_TEXT"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-34" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column ITSM_SUPPORT_REQUESTS</comment>
+		<addColumn schemaName="apps" tableName="ITSM_SUPPORT_REQUESTS">
+			<column name="RESPONSE_TEXT" type="CLOB" remarks="Текст ответа">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-35" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: ITSM_SUPPORT_REQUESTS</comment>
+		<dropColumn tableName="ITSM_SUPPORT_REQUESTS" schemaName="apps">
+			<column name="REJECTION_REASON"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-36" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column ITSM_SUPPORT_REQUESTS</comment>
+		<addColumn schemaName="apps" tableName="ITSM_SUPPORT_REQUESTS">
+			<column name="REJECTION_REASON" type="CLOB" remarks="Причина отклонения/закрытия заявки">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<!--	<changeSet id="lq-con-37" logicalFilePath="path-independent" author="conor" context="dev">
+            <comment>add column WF_ROUTE_USERS</comment>
+            <addColumn schemaName="apps" tableName="WF_ROUTE_USERS">
+                <column name="ORDER_NUM" type="NUMBER" remarks="Порядковый номер">
+                    <constraints nullable="true"/>
+                </column>
+            </addColumn>
+        </changeSet>-->
+
+	<changeSet id="lq-con-38" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column CALC_BS_RESULT_HEADERS</comment>
+		<addColumn schemaName="apps" tableName="CALC_BS_RESULT_HEADERS">
+			<column name="ORDER_NUMBER_AND_DATE" type="varchar2(200)" remarks="Номер и дата приказа о составе комиссии">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-39" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: CM_DOC_KEG_CTE_A4L to CM_DOC_AWLM_ITEM_TYPES</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="CM_DOC_KEG_CTE_A4L"
+				baseColumnNames="ITEM_TYPE"
+				constraintName="CM_DOC_KEG_CTE_A4L_FK11"
+				deferrable="true"
+				onDelete="NO ACTION"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="CM_DOC_AWLM_ITEM_TYPES"
+				referencedColumnNames="CODE"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-40" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column to res_monthly_calc_headers</comment>
+		<addColumn schemaName="apps"
+				   tableName="res_monthly_calc_headers">
+			<column name="transfer_to_fin_date" type="timestamp" remarks="Дата передачи в ПФ"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-41" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column to res_monthly_calc_headers</comment>
+		<addColumn schemaName="apps"
+				   tableName="res_monthly_calc_headers">
+			<column name="transfer_to_fin_status" type="varchar2(30)" remarks="Статус передачи в ПФ"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-42" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: dict_transfer_to_fin_statuses</comment>
+		<createTable tableName="dict_transfer_to_fin_statuses" schemaName="apps" remarks="Статусы отправки в подсистему Финансы">
+			<column name="code" type="varchar2(30)" remarks="Код статуса">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата изменения">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор изменения">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-43" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: dict_transfer_to_fin_statuses</comment>
+		<addPrimaryKey
+				columnNames="code"
+				constraintName="pk_dict_transfer_to_fin_statuses"
+				schemaName="apps"
+				tableName="dict_transfer_to_fin_statuses"/>
+	</changeSet>
+
+	<changeSet id="lq-con-44" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: dict_transfer_to_fin_statuses</comment>
+		<createTable tableName="dict_transfer_to_fin_statuses_tl" schemaName="apps" remarks="Статусы отправки в подсистему Финансы - перевод">
+			<column name="code" type="varchar2(30)" remarks="Код статуса">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar(10)" remarks="язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="name" type="varchar(200)" remarks="Наименование статуса">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата изменения">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор изменения">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-45" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: dict_transfer_to_fin_statuses_tl</comment>
+		<addPrimaryKey
+				columnNames="code, lang"
+				constraintName="pk_dict_transfer_to_fin_statuses_tl"
+				schemaName="apps"
+				tableName="dict_transfer_to_fin_statuses_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-con-46" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: dict_transfer_to_fin_statuses_tl to dict_transfer_to_fin_statuses</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="dict_transfer_to_fin_statuses_tl"
+				baseColumnNames="code"
+				constraintName="fk_dict_transfer_to_fin_statuses_tl_1"
+				deferrable="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_transfer_to_fin_statuses"
+				referencedColumnNames="code"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-47" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: res_monthly_calc_headers to dict_transfer_to_fin_statuses</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="res_monthly_calc_headers"
+				baseColumnNames="transfer_to_fin_status"
+				constraintName="fk_res_monthly_calc_headers_6"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_transfer_to_fin_statuses"
+				referencedColumnNames="code"
 		/>
 	</changeSet>
 
