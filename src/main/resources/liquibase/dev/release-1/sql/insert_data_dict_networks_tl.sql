@@ -1,0 +1,11 @@
+insert into APPS.DICT_NETWORKS_TL (NETWORK_CODE, LANG, SHORT_NAME, NAME, CREATE_BY, CREATE_DATE)
+values ('KEGOC', 'RU', 'сеть KEGOC', 'сети KEGOC', 1, '06.07.2019 00:00:00');
+
+insert into APPS.DICT_NETWORKS_TL (NETWORK_CODE, LANG, SHORT_NAME, NAME, CREATE_BY, CREATE_DATE)
+values ('KEGOC', 'KZ', 'сеть KEGOC', 'сети KEGOC', 1, '06.07.2019 00:00:00');
+
+insert into APPS.DICT_NETWORKS_TL (NETWORK_CODE, LANG, SHORT_NAME, NAME, CREATE_BY, CREATE_DATE)
+values ('EDN', 'RU', 'сети РЭК', 'распределительные сети', 1, '06.07.2019 00:00:00');
+
+insert into APPS.DICT_NETWORKS_TL (NETWORK_CODE, LANG, SHORT_NAME, NAME, CREATE_BY, CREATE_DATE)
+values ('EDN', 'KZ', 'сети РЭК', 'распределительные сети', 1, '06.07.2019 00:00:00');

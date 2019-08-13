@@ -1,0 +1,5 @@
+insert into apps.DICT_NETWORKS (CODE, CREATE_BY, CREATE_DATE)
+values ('KEGOC', 1, '06.07.2019 00:00:00');
+
+insert into apps.DICT_NETWORKS (CODE, CREATE_BY, CREATE_DATE)
+values ('EDN', 1, '06.07.2019 00:00:00');
