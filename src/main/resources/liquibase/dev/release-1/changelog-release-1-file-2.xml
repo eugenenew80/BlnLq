@@ -182,18 +182,18 @@
 	</changeSet>
 
 	<changeSet id="lq-con-11" logicalFilePath="path-independent" author="conor" context="dev">
-	<comment>Creating foreign constraint: dict_participant_roles_tl to dict_participant_roles</comment>
-	<addForeignKeyConstraint
-			baseTableSchemaName="apps"
-			baseTableName="dict_participant_roles_tl"
-			baseColumnNames="code"
-			constraintName="fk_dict_participant_roles_tl_1"
-			deferrable="true"
-			onDelete="CASCADE"
-			onUpdate="RESTRICT"
-			referencedTableSchemaName="apps"
-			referencedTableName="dict_participant_roles"
-			referencedColumnNames="code"/>
+		<comment>Creating foreign constraint: dict_participant_roles_tl to dict_participant_roles</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="dict_participant_roles_tl"
+				baseColumnNames="code"
+				constraintName="fk_dict_participant_roles_tl_1"
+				deferrable="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_participant_roles"
+				referencedColumnNames="code"/>
 	</changeSet>
 
 	<changeSet id="lq-con-12" logicalFilePath="path-independent" author="conor" context="dev">
@@ -628,14 +628,14 @@
 		</addColumn>
 	</changeSet>
 
-<!--	<changeSet id="lq-con-37" logicalFilePath="path-independent" author="conor" context="dev">
-		<comment>add column WF_ROUTE_USERS</comment>
-		<addColumn schemaName="apps" tableName="WF_ROUTE_USERS">
-			<column name="ORDER_NUM" type="NUMBER" remarks="Порядковый номер">
-				<constraints nullable="true"/>
-			</column>
-		</addColumn>
-	</changeSet>-->
+	<!--	<changeSet id="lq-con-37" logicalFilePath="path-independent" author="conor" context="dev">
+            <comment>add column WF_ROUTE_USERS</comment>
+            <addColumn schemaName="apps" tableName="WF_ROUTE_USERS">
+                <column name="ORDER_NUM" type="NUMBER" remarks="Порядковый номер">
+                    <constraints nullable="true"/>
+                </column>
+            </addColumn>
+        </changeSet>-->
 
 	<changeSet id="lq-con-38" logicalFilePath="path-independent" author="conor" context="dev">
 		<comment>add column CALC_BS_RESULT_HEADERS</comment>
@@ -668,6 +668,123 @@
 				   tableName="res_monthly_calc_headers">
 			<column name="transfer_to_fin_date" type="timestamp" remarks="Дата передачи в ПФ"/>
 		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-41" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column to res_monthly_calc_headers</comment>
+		<addColumn schemaName="apps"
+				   tableName="res_monthly_calc_headers">
+			<column name="transfer_to_fin_status" type="varchar2(30)" remarks="Статус передачи в ПФ"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-42" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: dict_transfer_to_fin_statuses</comment>
+		<createTable tableName="dict_transfer_to_fin_statuses" schemaName="apps" remarks="Статусы отправки в подсистему Финансы">
+			<column name="code" type="varchar2(30)" remarks="Код статуса">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата изменения">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор изменения">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-43" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: dict_transfer_to_fin_statuses</comment>
+		<addPrimaryKey
+				columnNames="code"
+				constraintName="pk_dict_transfer_to_fin_statuses"
+				schemaName="apps"
+				tableName="dict_transfer_to_fin_statuses"/>
+	</changeSet>
+
+	<changeSet id="lq-con-44" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: dict_transfer_to_fin_statuses</comment>
+		<createTable tableName="dict_transfer_to_fin_statuses_tl" schemaName="apps" remarks="Статусы отправки в подсистему Финансы - перевод">
+			<column name="code" type="varchar2(30)" remarks="Код статуса">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar(10)" remarks="язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="name" type="varchar(200)" remarks="Наименование статуса">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата изменения">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор изменения">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-45" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: dict_transfer_to_fin_statuses_tl</comment>
+		<addPrimaryKey
+				columnNames="code, lang"
+				constraintName="pk_dict_transfer_to_fin_statuses_tl"
+				schemaName="apps"
+				tableName="dict_transfer_to_fin_statuses_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-con-46" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: dict_transfer_to_fin_statuses_tl to dict_transfer_to_fin_statuses</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="dict_transfer_to_fin_statuses_tl"
+				baseColumnNames="code"
+				constraintName="fk_dict_transfer_to_fin_statuses_tl_1"
+				deferrable="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_transfer_to_fin_statuses"
+				referencedColumnNames="code"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-47" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: res_monthly_calc_headers to dict_transfer_to_fin_statuses</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="res_monthly_calc_headers"
+				baseColumnNames="transfer_to_fin_status"
+				constraintName="fk_res_monthly_calc_headers_6"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_transfer_to_fin_statuses"
+				referencedColumnNames="code"
+		/>
 	</changeSet>
 
 </databaseChangeLog>
