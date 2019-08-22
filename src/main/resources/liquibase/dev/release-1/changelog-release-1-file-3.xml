@@ -4243,7 +4243,6 @@
 		<rollback/>
 	</changeSet>
 
-
 	<changeSet id="lq-rus-614" logicalFilePath="path-independent" author="ruslan" context="dev">
 		<comment>add column calc_supply_volume_temp</comment>
 		<addColumn schemaName="apps" tableName="calc_supply_volume_temp">
@@ -4251,5 +4250,56 @@
 				<constraints nullable="true"/>
 			</column>
 		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-615" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column res_monthly_calc_lines</comment>
+		<addColumn schemaName="apps" tableName="res_monthly_calc_lines">
+			<column name="is_delete" type="number" remarks="Подлежит удалению">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-616" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop table res_daily_schedule</comment>
+		<dropTable cascadeConstraints="true"
+				   schemaName="apps"
+				   tableName="res_daily_schedule"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-617" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop table res_daily_schedule_info_type</comment>
+		<dropTable cascadeConstraints="true"
+				   schemaName="apps"
+				   tableName="res_daily_schedule_info_type"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-618" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop table res_daily_schedule_info_type_tl</comment>
+		<dropTable cascadeConstraints="true"
+				   schemaName="apps"
+				   tableName="res_daily_schedule_info_type_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-619" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop table res_daily_schedule_values_headers</comment>
+		<dropTable cascadeConstraints="true"
+				   schemaName="apps"
+				   tableName="res_daily_schedule_values_headers"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-620" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop table res_daily_schedule_values_lines</comment>
+		<dropTable cascadeConstraints="true"
+				   schemaName="apps"
+				   tableName="res_daily_schedule_values_lines"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-621" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop table res_daily_schedule_volume_types</comment>
+		<dropTable cascadeConstraints="true"
+				   schemaName="apps"
+				   tableName="res_daily_schedule_volume_types"/>
 	</changeSet>
 </databaseChangeLog>
