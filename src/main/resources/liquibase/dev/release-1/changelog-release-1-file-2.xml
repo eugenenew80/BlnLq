@@ -796,4 +796,14 @@
 		<rollback/>
 	</changeSet>
 
+    <changeSet id="lq-con-49" logicalFilePath="path-independent" author="conor" context="dev">
+        <comment>drop not null constraint res_daily_schedules_lines</comment>
+        <dropNotNullConstraint columnDataType="number"
+                               columnName="unit_id"
+                               schemaName="apps"
+                               tableName="res_daily_schedules_lines"/>
+        <rollback/>
+
+    </changeSet>
+
 </databaseChangeLog>
