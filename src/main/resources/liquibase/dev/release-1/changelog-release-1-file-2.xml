@@ -958,4 +958,156 @@
 		/>
 	</changeSet>
 
+	<changeSet id="lq-con-59" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: CALC_LOSS_FACT_RESULT_NOTES</comment>
+		<createTable tableName="CALC_LOSS_FACT_RESULT_NOTES" remarks="Примечания к Фактическим потерям МЭС - Акт" schemaName="apps">
+			<column name="id" type="number" remarks="Идентификатор">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="header_id" type="number" remarks="Идентификатор заголовка шаблона">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="note_num" type="number" remarks="Порядковый номер">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-60" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating table: CALC_LOSS_FACT_RESULT_NOTES_TL</comment>
+		<createTable tableName="CALC_LOSS_FACT_RESULT_NOTES_tl" schemaName="apps" remarks="Примечания к Фактическим потерям МЭС - Акт - перевод">
+			<column name="id" type="varchar2(30)" remarks="Идентификатор перевода примечания">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar2(10)" remarks="Язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="note_id" type="number" remarks="Ссылка на родительскую запись">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="note_text" type="varchar2(500)" remarks="Наименование площадки">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-con-61" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: CALC_LOSS_FACT_RESULT_NOTES</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_CALC_LOSS_FACT_RESULT_NOTES"
+				schemaName="apps"
+				tableName="CALC_LOSS_FACT_RESULT_NOTES"/>
+	</changeSet>
+
+	<changeSet id="lq-con-62" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: CALC_LOSS_FACT_RESULT_NOTES</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="CALC_LOSS_FACT_RESULT_NOTES_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-con-63" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: CALC_LOSS_FACT_RESULT_NOTES to CALC_LOSS_FACT_RESULT_HEADERS</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="CALC_LOSS_FACT_RESULT_NOTES"
+				baseColumnNames="header_id"
+				constraintName="fk_CALC_LOSS_FACT_RESULT_NOTES_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="CALC_LOSS_FACT_RESULT_HEADERS"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-64" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating primary key for table: CALC_LOSS_FACT_RESULT_NOTES_tl</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_CALC_LOSS_FACT_RESULT_NOTES_tl"
+				schemaName="apps"
+				tableName="CALC_LOSS_FACT_RESULT_NOTES_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-con-65" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: CALC_LOSS_FACT_RESULT_NOTES_tl</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="CALC_LOSS_FACT_RESULT_NOTES_tl_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-con-66" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>creating unique constraint for table: CALC_LOSS_FACT_RESULT_NOTES_tl</comment>
+		<addUniqueConstraint
+				constraintName="un_CALC_LOSS_FACT_RESULT_NOTES_tl_1"
+				schemaName="apps"
+				tableName="CALC_LOSS_FACT_RESULT_NOTES_tl"
+				columnNames="note_id, lang"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-67" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating foreign constraint: CALC_LOSS_FACT_RESULT_NOTES_tl to CALC_LOSS_FACT_RESULT_NOTES</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="CALC_LOSS_FACT_RESULT_NOTES_tl"
+				baseColumnNames="note_id"
+				constraintName="fk_CALC_LOSS_FACT_RESULT_NOTES_tl_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="CALC_LOSS_FACT_RESULT_NOTES"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
 </databaseChangeLog>
