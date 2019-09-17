@@ -1110,4 +1110,21 @@
 		/>
 	</changeSet>
 
+	<changeSet id="lq-con-68" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: CALC_LOSS_FACT_RESULT_NOTES_TL</comment>
+		<dropColumn tableName="CALC_LOSS_FACT_RESULT_NOTES_TL" schemaName="apps">
+			<column name="NOTE_TEXT"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-69" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column CALC_LOSS_FACT_RESULT_NOTES_TL</comment>
+		<addColumn schemaName="apps" tableName="CALC_LOSS_FACT_RESULT_NOTES_TL">
+			<column name="NOTE_TEXT" type="CLOB" remarks="Текст примечания">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
 </databaseChangeLog>
