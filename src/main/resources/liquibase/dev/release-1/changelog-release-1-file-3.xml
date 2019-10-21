@@ -4302,4 +4302,179 @@
 				   schemaName="apps"
 				   tableName="res_daily_schedule_volume_types"/>
 	</changeSet>
+
+	<changeSet id="lq-rus-622" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column res_time_series_header</comment>
+		<addColumn schemaName="apps" tableName="res_time_series_header">
+			<column name="is_canceled" type="number" remarks="Отменен">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-623" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column res_time_series_header</comment>
+		<addColumn schemaName="apps" tableName="res_time_series_header">
+			<column name="daily_header_id" type="number" remarks="Идентификатор заголовка суточного графика">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-624" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment> Add comments to the columns res_daily_schedules_lines</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Drop indexes
+			drop index APPS.IDX_RES_DAILY_SCHEDULES_LINES_U1;
+
+			-- Create/Recreate indexes
+			create unique index APPS.idx_res_daily_schedules_lines_u1 on APPS.res_daily_schedules_lines (HEADER_ID, TAB_PAGE_CODE, CONTRACT_ID, ENERGY_SOURCE_ID, RES_ENERGY_ZONE_ID, CUSTOMER_ENERGY_ZONE_ID);
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-625" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column res_monthly_calc_headers</comment>
+		<addColumn schemaName="apps" tableName="res_monthly_calc_headers">
+			<column name="version" type="number" remarks="Версия">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+
+	<changeSet id="lq-rus-626" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: cm_doc_keg_cte_tariff</comment>
+		<createTable tableName="cm_doc_keg_cte_tariff" remarks="Плановые тарифы по договору" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="contract_id" type="number" remarks="Ид договора">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="val" type="number" remarks="Тариф">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="start_date" type="date" remarks="Срок действия с">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="end_date" type="date" remarks="Срок действия по">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="text" type="varchar2(500 char)" remarks="Комментарий">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-627" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: cm_doc_keg_cte_tariff</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_cm_doc_keg_cte_tariff"
+				schemaName="apps"
+				tableName="cm_doc_keg_cte_tariff"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-628" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: cm_doc_keg_cte_tariff</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="cm_doc_keg_cte_tariff_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-629" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: cm_doc_keg_cte_tariff to cm_doc_keg_cte</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="cm_doc_keg_cte_tariff"
+				baseColumnNames="contract_id"
+				constraintName="fk_cm_doc_keg_cte_tariff_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="cm_doc_keg_cte"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-630" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191016/create_dict_supply_routes.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-631" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191016/insert_data_dict_supply_routes.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-632" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: apps.DICT_SUPPLY_ROUTES</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="DICT_SUPPLY_ROUTES_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-633" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191016/update_table_dict_network_segment_and_members.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-634" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column plan_production_plan_lines</comment>
+		<addColumn schemaName="apps" tableName="dict_energy_sources">
+			<column name="is_up" type="number" remarks="Относится к Условным потребителям РФЦ">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
 </databaseChangeLog>
