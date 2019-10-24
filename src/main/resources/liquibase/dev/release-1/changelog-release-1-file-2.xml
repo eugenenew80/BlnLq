@@ -1127,4 +1127,13 @@
 		</addColumn>
 	</changeSet>
 
+	<changeSet id="lq-con-70" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column DICT_BUSINESS_PARTNERS</comment>
+		<addColumn schemaName="apps" tableName="DICT_BUSINESS_PARTNERS">
+			<column name="IS_TRADER" type="NUMBER" remarks="Является трейдером">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
 </databaseChangeLog>
