@@ -4477,4 +4477,456 @@
 		</addColumn>
 	</changeSet>
 
+	<changeSet id="lq-rus-635" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column dict_supply_routes</comment>
+		<dropSequence schemaName="apps"
+					  sequenceName="DICT_SUPPLY_ROUTES_s"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-636" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: apps.DICT_SUPPLY_ROUTES</comment>
+		<createSequence
+				incrementBy="500"
+				schemaName="apps"
+				sequenceName="DICT_SUPPLY_ROUTES_s"
+				startValue="1"/>
+	</changeSet>
+
+ 	<changeSet id="lq-rus-637" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: cm_doc_keg_cte_plan_volume</comment>
+		<createTable tableName="cm_doc_keg_cte_plan_volume" remarks="плановые объемы по договору" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="contract_id" type="number" remarks="Ид договора">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="period_id" type="number" remarks="Ид расчетного периода">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="payment_date" type="date" remarks="Дата планируемого платежа">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="order_num" type="VARCHAR2(30)" remarks="Номер планового заказа в сап">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="tariff" type="number" remarks="Тариф">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="val" type="number" remarks="Объем Квт.ч">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="estimated_amount" type="number" remarks="планируемая сумма">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-638" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: cm_doc_keg_cte_plan_volume</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_cm_doc_keg_cte_plan_volume"
+				schemaName="apps"
+				tableName="cm_doc_keg_cte_plan_volume"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-639" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: cm_doc_keg_cte_plan_volume</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="cm_doc_keg_cte_plan_volume_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-640" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: cm_doc_keg_cte_plan_volume to cm_doc_keg_cte</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="cm_doc_keg_cte_plan_volume"
+				baseColumnNames="contract_id"
+				constraintName="fk_cm_doc_keg_cte_plan_volume_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="cm_doc_keg_cte"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-641" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/create_table_calc_distr_frml_ways_create.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-642" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/create_table_calc_distr_frml_ways_create_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-643" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/create_table_calc_distr_methods.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-644" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/create_table_calc_distr_methods_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-645" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/create_table_calc_distr_rule_methods.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-646" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/create_table_calc_distr_rule_methods_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-647" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/create_table_dict_energy_source_type2.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-648" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/create_table_dict_energy_source_type2_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-649" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/update_table_calc_distribution_headers.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-650" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/update_table_dict_cross_data_elements.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-651" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column DICT_NETWORK_SEGMENTS_AND_MEMBERS</comment>
+		<addColumn schemaName="apps" tableName="DICT_NETWORK_SEGMENTS_AND_MEMBERS">
+			<column name="header_id" type="number" remarks="Ид заголовка">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-652" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191021/update2_table_dict_network_segment_and_members.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-654" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191028/create_table_calc_distr_formation_methods.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-655" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191028/create_table_calc_distr_formation_methods_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-656" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191028/insert_data_calc_distr_formation_methods.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-657" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191028/insert_data_calc_distr_formation_methods_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-658" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191028/update2_table_calc_distribution_headers.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-659" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column </comment>
+		<addColumn schemaName="apps" tableName="calc_distribution_headers">
+			<column name="is_checked" type="number" remarks="Проверено">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-660" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191028/create_table_calc_distr_supplies.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-661" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191028/create_table_calc_distr_supply_traders.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-662" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: report</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="CALC_DISTR_SUPPLIES_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-663" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: report</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="CALC_DISTR_SUPPLY_TRADERS_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-664" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191029/insert_data_calc_distr_frml_ways_create.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-665" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191029/insert_data_calc_distr_frml_ways_create_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-666" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191029/insert_data_calc_distr_methods.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-667" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191029/insert_data_calc_distr_methods_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-668" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191029/insert_data_calc_distr_rule_methods.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-669" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191029/insert_data_calc_distr_rule_methods_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-670" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191029/insert_data_dict_energy_source_type2.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-671" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191029/insert_data_dict_energy_source_type2_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
+
