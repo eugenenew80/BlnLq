@@ -1136,4 +1136,21 @@
 		</addColumn>
 	</changeSet>
 
+	<changeSet id="lq-con-71" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>creating index for table: CALC_DISTRIBUTION_DEPENDENCIES</comment>
+		<createIndex indexName="IDX_CALC_DISTRIBUTION_DEPENDENCIES_N1" schemaName="apps" tableName="CALC_DISTRIBUTION_DEPENDENCIES">
+			<column name="target_doc_id"  type="number"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="lq-con-72" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> creating index for tables: CALC_DISTRIBUTION_DEPENDENCIES, DICT_NETWORK_SEGMENTS, CALC_DISTRIBUTION_HEADERS </comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			create index IDX_CALC_DISTRIBUTION_DEPENDENCIES_N2 on APPS.CALC_DISTRIBUTION_DEPENDENCIES (source_doc_id);
+			create index IDX_DICT_NETWORK_SEGMENTS_N1 		   on APPS.DICT_NETWORK_SEGMENTS 		  (parent_code);
+			create index IDX_CALC_DISTRIBUTION_HEADERS_N1 	   on APPS.CALC_DISTRIBUTION_HEADERS 	  (period_id);
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
