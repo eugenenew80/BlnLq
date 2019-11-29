@@ -3705,7 +3705,6 @@
 		/>
 	</changeSet>
 
-
 	<changeSet id="lq-rus-579-1" logicalFilePath="path-independent" author="ruslan" context="dev">
 		<comment>add column calc_energy_source_co_lines</comment>
 		<addColumn schemaName="apps" tableName="calc_energy_source_co_lines">

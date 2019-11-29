@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <changeSet id="lq-rus-672" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/create_table_calc_distr_faa_rules.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-673" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/create_table_calc_distr_faa_rules_tl.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-674" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/update_table_dict_networks.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-675" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/create_table_calc_distr_supply_volumes.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-676" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/create_table_calc_distr_supply_volumes.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-677" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/create_table_calc_distr_formulas.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-678" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/create_table_calc_distr_formulas.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-679" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/create_table_calc_distr_formula_vars.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-680" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/insert_data_calc_distr_rule_methods_2.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+    <changeSet id="lq-rus-681" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191106/insert_data_calc_distr_rule_methods_tl_2.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-682" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Change column in table calc_distr_faa_rules_tl</comment>
+		<modifyDataType
+				tableName="calc_distr_faa_rules_tl"
+				schemaName="apps"
+				columnName="short_name"
+				newDataType="varchar2(50 char)"
+		/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-683" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Change column in table calc_distr_faa_rules_tl</comment>
+		<modifyDataType
+				tableName="calc_distr_faa_rules_tl"
+				schemaName="apps"
+				columnName="name"
+				newDataType="varchar2(150 char)"
+		/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-684" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: calc_distr_supply_volumes</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="calc_distr_supply_volumes_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-685" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: calc_distr_formulas</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="calc_distr_formulas_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-686" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191115/update_table_calc_distr_supply_values.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-687" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191115/update_table_calc_distr_formula_vars.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-688" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>drop table calc_distr_formulas</comment>
+		<dropTable cascadeConstraints="true"
+				   schemaName="apps"
+				   tableName="calc_distr_formulas"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-689" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>call sql file</comment>
+		<sqlFile dbms="h2, oracle"
+				 encoding="utf8"
+				 endDelimiter=";"
+				 path="sql/20191115/update_table_calc_distr_formula_vars-2.sql"
+				 relativeToChangelogFile="true"
+				 splitStatements="true"
+				 stripComments="true"/>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-690" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column dict_supply_routes</comment>
+		<addColumn schemaName="apps" tableName="dict_supply_routes">
+			<column name="header_id" type="number" remarks="Ид заголовка распределения">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-691" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: dict_supply_routes to calc_distribution_headers</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="dict_supply_routes"
+				baseColumnNames="header_id"
+				constraintName="fk_dict_supply_routes_6"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="calc_distribution_headers"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-692" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: calc_distr_dictionary</comment>
+		<createTable tableName="calc_distr_dictionary" remarks="Справочник для хранения всех наименований к документу по распределению" schemaName="apps">
+			<column name="id" type="number" remarks="Ид">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="header_id" type="number" remarks="Ид заголовка">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="table_name" type="varchar2(100 char)" remarks="Название таблица">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="table_id" type="number" remarks="Ид из таблицы">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-693" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: calc_distr_dictionary</comment>
+		<addPrimaryKey
+				columnNames="id"
+				constraintName="pk_calc_distr_dictionary"
+				schemaName="apps"
+				tableName="calc_distr_dictionary"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-694" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>creating unique constraint for table: calc_distr_dictionary</comment>
+		<addUniqueConstraint
+				constraintName="un_calc_distr_dictionary_1"
+				schemaName="apps"
+				tableName="calc_distr_dictionary"
+				columnNames="header_id,table_name,table_id"
+				deferrable="true"
+				initiallyDeferred="true"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-695" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: calc_distr_dictionary</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="calc_distr_dictionary_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-696" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_distr_dictionary to calc_distribution_headers</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_distr_dictionary"
+				baseColumnNames="header_id"
+				constraintName="fk_calc_distr_dictionary_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="calc_distribution_headers"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-697" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating table: calc_distr_dictionary_tl</comment>
+		<createTable tableName="calc_distr_dictionary_tl" remarks="Перевод Справочник для хранения всех наименований к документу по распределению" schemaName="apps">
+			<column name="dictionary_id" type="number" remarks="Ссылка на родительскую запись">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="lang" type="varchar2(10)" remarks="Язык">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="short_name" type="VARCHAR2(150 char)" remarks="Краткое наименование">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="name" type="VARCHAR2(500 char)" remarks="Полное наименование">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_date" type="TIMESTAMP" remarks="Дата создания">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_date" type="TIMESTAMP" remarks="Дата обновления">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="create_by" type="number" remarks="Автор">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="last_update_by" type="number" remarks="Автор обновления">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="lq-rus-698" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating primary key for table: calc_distr_dictionary_tl</comment>
+		<addPrimaryKey
+				columnNames="dictionary_id, lang"
+				constraintName="pk_calc_distr_dictionary_tl"
+				schemaName="apps"
+				tableName="calc_distr_dictionary_tl"/>
+	</changeSet>
+
+	<changeSet id="lq-rus-699" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_distr_dictionary_tl to calc_distr_dictionary</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_distr_dictionary_tl"
+				baseColumnNames="dictionary_id"
+				constraintName="fk_calc_distr_dictionary_tl_1"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="CASCADE"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="calc_distr_dictionary"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-700" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column calc_distribution_headers</comment>
+		<addColumn schemaName="apps" tableName="calc_distribution_headers">
+			<column name="unit_id" type="number" remarks="Ид еденицы измерения">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-701" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_distribution_headers to dict_units</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_distribution_headers"
+				baseColumnNames="unit_id"
+				constraintName="fk_calc_distribution_headers_10"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_units"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-702" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: calc_distribution_headers</comment>
+		<dropColumn tableName="calc_distribution_headers" schemaName="apps">
+			<column name="unit_id"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-703" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>add column calc_distribution_headers</comment>
+		<addColumn schemaName="apps" tableName="calc_distribution_headers">
+			<column name="unit_id" type="number" remarks="Ид еденицы измерения">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-rus-704" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating foreign constraint: calc_distribution_headers to dict_units</comment>
+		<addForeignKeyConstraint
+				baseTableSchemaName="apps"
+				baseTableName="calc_distribution_headers"
+				baseColumnNames="unit_id"
+				constraintName="fk_calc_distribution_headers_10"
+				deferrable="true"
+				initiallyDeferred="true"
+				onDelete="RESTRICT"
+				onUpdate="RESTRICT"
+				referencedTableSchemaName="apps"
+				referencedTableName="dict_units"
+				referencedColumnNames="id"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-rus-705" logicalFilePath="path-independent" author="ruslan" context="dev" failOnError="false">
+		<comment>Drop columns from table: calc_distribution_es</comment>
+		<dropColumn tableName="calc_distribution_es" schemaName="apps">
+			<column name="unit_id"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-rus-706" logicalFilePath="path-independent" author="ruslan" context="dev">
+		<comment>Creating sequence for table: itsm_service_interface</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="itsm_service_interface_s"
+				startValue="1"/>
+	</changeSet>
+
+</databaseChangeLog>
