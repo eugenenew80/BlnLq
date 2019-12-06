@@ -1153,4 +1153,28 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-73" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column to CALC_DISTRIBUTION_HEADERS</comment>
+		<addColumn schemaName="apps"
+				   tableName="CALC_DISTRIBUTION_HEADERS">
+			<column name="from_doc_id" type="varchar2(30)" remarks="Исходный документ"/>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="lq-con-74" logicalFilePath="path-independent" author="conor" context="dev" failOnError="false">
+		<comment>Drop columns from table: CALC_DISTRIBUTION_HEADERS</comment>
+		<dropColumn tableName="CALC_DISTRIBUTION_HEADERS" schemaName="apps">
+			<column name="from_doc_id"/>
+		</dropColumn>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-75" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add column to CALC_DISTRIBUTION_HEADERS</comment>
+		<addColumn schemaName="apps"
+				   tableName="CALC_DISTRIBUTION_HEADERS">
+			<column name="from_doc_id" type="NUMBER" remarks="Исходный документ"/>
+		</addColumn>
+	</changeSet>
+
 </databaseChangeLog>
