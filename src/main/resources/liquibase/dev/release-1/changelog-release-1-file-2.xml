@@ -1177,4 +1177,43 @@
 		</addColumn>
 	</changeSet>
 
+	<changeSet id="lq-con-76" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add not null constraint DICT_SUPPLY_NOTES</comment>
+		<addNotNullConstraint
+				columnDataType="number"
+				columnName="energy_source_id"
+				defaultNullValue="0"
+				schemaName="apps"
+				tableName="dict_supply_routes"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-77" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>add not null constraint DICT_SUPPLY_NOTES</comment>
+		<addNotNullConstraint
+				columnDataType="varchar2(20)"
+				columnName="network_code"
+				defaultNullValue="0"
+				schemaName="apps"
+				tableName="dict_supply_routes"
+		/>
+	</changeSet>
+
+	<changeSet id="lq-con-78" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>creating index for table: DICT_SUPPLY_ROUTES</comment>
+		<createIndex
+				indexName="IDX_DICT_SUPPLY_ROUTES_U1"
+				schemaName="apps"
+				tableName="DICT_SUPPLY_ROUTES"
+				unique="true">
+			<column name="network_segment_code"/>
+			<column name="energy_source_id"/>
+			<column name="network_code"/>
+			<column name="consumer_id"/>
+			<column name="consumer_unit_id"/>
+			<column name="start_date"/>
+			<column name="header_id"/>
+		</createIndex>
+	</changeSet>
+
 </databaseChangeLog>
