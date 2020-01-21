@@ -1216,4 +1216,64 @@
 		</createIndex>
 	</changeSet>
 
+	<changeSet id="lq-con-79" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>creating index for table: FIN_PRO_CLDR_LINES</comment>
+		<createIndex
+				indexName="IDX_FIN_PRO_CLDR_LINES_U1"
+				schemaName="apps"
+				tableName="FIN_PRO_CLDR_LINES"
+				unique="true">
+			<column name="header_id"/>
+			<column name="day_off"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="lq-con-80" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>creating index for table: DICT_SUPPLY_ROUTES</comment>
+		<createIndex indexName="IDX_DICT_SUPPLY_ROUTES_N1" schemaName="apps" tableName="DICT_SUPPLY_ROUTES">
+			<column name="header_id"  type="number"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="lq-con-81" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.DICT_NETWORK_SEGMENTS_AND_MEMBERS add occurrence_way VARCHAR2(30);
+			-- Add comments to the columns
+			comment on column APPS.DICT_NETWORK_SEGMENTS_AND_MEMBERS.occurrence_way
+			is 'Способ возникновения записи';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-82" logicalFilePath="path-independent" author="conor" context="dev">
+	<comment> Create indexes</comment>
+	<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+		-- Drop indexes
+		drop index APPS.IDX_CALC_DISTRIBUTION_DEPENDENCIES_N1;
+		drop index IDX_CALC_DISTRIBUTION_DEPENDENCIES_N2;
+		-- Create/Recreate indexes
+		create bitmap index IDX_CALC_DISTRIBUTION_DEPENDENCIES_N1 on APPS.CALC_DISTRIBUTION_DEPENDENCIES (source_doc_id);
+		create bitmap index IDX_CALC_DISTRIBUTION_DEPENDENCIES_N2 on APPS.CALC_DISTRIBUTION_DEPENDENCIES (target_doc_id);
+	</sql>
+	<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-83" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table APPS.DICT_NETWORK_SEGMENTS_AND_MEMBERS
+			add constraint FK_DICT_NETWORK_SEGMENTS_AND_MEMBERS_5 foreign key (OCCURRENCE_WAY)
+			references apps.calc_distr_frml_ways_create (CODE)
+			deferrable initially deferred;
+			-- Create/Recreate indexes
+			create index IDX_CALC_DISTR_SUPPLIES_N1 on APPS.CALC_DISTR_SUPPLIES (network_segment_member_id);
+			-- Create/Recreate indexes
+			create unique index IDX_CALC_DISTR_SUPPLY_TRADERS_U1 on APPS.CALC_DISTR_SUPPLY_TRADERS (supply_id, trader_id);
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
