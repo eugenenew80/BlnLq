@@ -1882,4 +1882,31 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-105" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: itsm_support_requests_interface</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="itsm_support_requests_interface_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-con-106" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: itsm_support_requests_file_interface</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="itsm_support_requests_file_interface_s"
+				startValue="1"/>
+	</changeSet>
+
+	<changeSet id="lq-con-107" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: itsm_evaluation_interface</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="itsm_evaluation_interface_s"
+				startValue="1"/>
+	</changeSet>
+
 </databaseChangeLog>
