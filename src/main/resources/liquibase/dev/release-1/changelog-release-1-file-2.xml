@@ -1775,4 +1775,44 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-101" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Add/modify columns</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.ITSM_SUPPORT_REQUESTS add evaluation_1 number;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add evaluation_date_1 timestamp;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add transferred_to_itsm_state_1 VARCHAR2(1);
+			alter table APPS.ITSM_SUPPORT_REQUESTS add complete_code_1 VARCHAR2(100);
+			alter table APPS.ITSM_SUPPORT_REQUESTS add is_transferred_to_itsm_1 number;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add itsm_id_1 VARCHAR2(100);
+			alter table APPS.ITSM_SUPPORT_REQUESTS add suspension_reason_code_1 VARCHAR2(100);
+			alter table APPS.ITSM_SUPPORT_REQUESTS add renewal_date_1 date;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add suspension_reason_desc_1 clob;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add evaluation_is_transferred_1 number;
+
+			-- Add comments to the columns
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.evaluation_1
+			is 'Оценка';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.evaluation_date_1
+			is 'Дата и время оценки';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.transferred_to_itsm_state_1
+			is 'Cтатус передачи записи в систему itsm';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.complete_code_1
+			is 'Код завершения запроса';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.is_transferred_to_itsm_1
+			is 'Передан в itsm';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.itsm_id_1
+			is 'Ид запроса из itsm';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.suspension_reason_code_1
+			is 'Код приостановки запроса';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.renewal_date_1
+			is 'Дата возобновления';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.suspension_reason_desc_1
+			is 'Причина приостановки запроса';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.evaluation_is_transferred_1
+			is 'Оценка передана';
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
