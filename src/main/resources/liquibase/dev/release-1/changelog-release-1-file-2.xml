@@ -1815,4 +1815,62 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-102" logicalFilePath="path-independent" author="conor" context="dev">
+	<comment> Drop columns</comment>
+	<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Drop columns
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column evaluation_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column evaluation_date_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column transferred_to_itsm_state_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column complete_code_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column is_transferred_to_itsm_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column itsm_id_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column suspension_reason_code_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column renewal_date_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column suspension_reason_desc_1;
+			alter table APPS.ITSM_SUPPORT_REQUESTS drop column evaluation_is_transferred_1;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-103" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Add/modify columns</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.ITSM_SUPPORT_REQUESTS add evaluation number;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add evaluation_date timestamp;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add transferred_to_itsm_state VARCHAR2(1);
+			alter table APPS.ITSM_SUPPORT_REQUESTS add complete_code VARCHAR2(100);
+			alter table APPS.ITSM_SUPPORT_REQUESTS add is_transferred_to_itsm number;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add itsm_id VARCHAR2(100);
+			alter table APPS.ITSM_SUPPORT_REQUESTS add suspension_reason_code VARCHAR2(100);
+			alter table APPS.ITSM_SUPPORT_REQUESTS add renewal_date date;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add suspension_reason_desc clob;
+			alter table APPS.ITSM_SUPPORT_REQUESTS add evaluation_is_transferred number;
+
+			-- Add comments to the columns
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.evaluation
+			is 'Оценка';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.evaluation_date
+			is 'Дата и время оценки';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.transferred_to_itsm_state
+			is 'Cтатус передачи записи в систему itsm';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.complete_code
+			is 'Код завершения запроса';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.is_transferred_to_itsm
+			is 'Передан в itsm';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.itsm_id
+			is 'Ид запроса из itsm';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.suspension_reason_code
+			is 'Код приостановки запроса';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.renewal_date
+			is 'Дата возобновления';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.suspension_reason_desc
+			is 'Причина приостановки запроса';
+			comment on column APPS.ITSM_SUPPORT_REQUESTS.evaluation_is_transferred
+			is 'Оценка передана';
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
