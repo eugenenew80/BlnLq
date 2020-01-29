@@ -1928,4 +1928,19 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-110" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>drop sequence dict_supply_routes</comment>
+		<dropSequence schemaName="apps"
+					  sequenceName="DICT_SUPPLY_ROUTES_s"/>
+	</changeSet>
+
+	<changeSet id="lq-con-111" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: apps.DICT_SUPPLY_ROUTES</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="DICT_SUPPLY_ROUTES_s"
+				startValue="15600"/>
+	</changeSet>
+
 </databaseChangeLog>
