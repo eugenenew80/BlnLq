@@ -1909,4 +1909,14 @@
 				startValue="1"/>
 	</changeSet>
 
+	<changeSet id="lq-con-108" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop constraints</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Drop primary, unique and foreign key constraints
+			alter table APPS.DICT_CROSS_DATA_ELEMENTS
+			  drop constraint UN_DICT_CROSS_DATA_ELEMENTS_1 cascade;
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
