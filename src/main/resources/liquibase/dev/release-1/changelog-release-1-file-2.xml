@@ -1919,4 +1919,13 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-109" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create index</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create/Recreate indexes
+			create index IDX_DICT_NETWORK_SEGMENTS_AND_MEMBERS_N2 on APPS.DICT_NETWORK_SEGMENTS_AND_MEMBERS (network_segment_code);
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
