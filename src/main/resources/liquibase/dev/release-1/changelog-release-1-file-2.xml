@@ -1988,4 +1988,26 @@
 				startValue="1"/>
 	</changeSet>
 
+	<changeSet id="lq-con-114" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate/Drop indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create/Recreate indexes
+			create bitmap index idx_calc_distribution_mp_of_sp_n1 on APPS.CALC_DISTRIBUTION_MP_OF_SP (header_id);
+			-- Drop indexes
+			drop index SYSTEM.IDX_DICT_CROSS_DATA_ELEMENTS_N8;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-115" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate/Drop indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create/Recreate indexes
+			-- Create/Recreate indexes
+			create index IDX_DICT_CROSS_DATA_ELEMENTS_N8 on APPS.DICT_CROSS_DATA_ELEMENTS (HEADER_ID)
+			tablespace USERS;
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
