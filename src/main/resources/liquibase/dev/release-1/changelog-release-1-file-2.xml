@@ -1943,4 +1943,49 @@
 				startValue="15600"/>
 	</changeSet>
 
+	<changeSet id="lq-con-112" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			CREATE TABLE APPS.CALC_ASP1_CONCERNED_SUBJECTS (
+			ID NUMBER NOT NULL,
+			DOC_TYPE_CODE VARCHAR2(30 CHAR) NOT NULL,
+			DOC_ID NUMBER NOT NULL,
+			BP_ID NUMBER NOT NULL,
+			CREATE_BY NUMBER,
+			CREATE_DATE TIMESTAMP(6),
+			LAST_UPDATE_BY NUMBER,
+			LAST_UPDATE_DATE TIMESTAMP(6),
+			CONSTRAINT PK_CALC_ASP1_CONCERNED_SUBJECTS PRIMARY KEY (ID))
+			STORAGE (
+			INITIAL 64K
+			MAXEXTENTS UNLIMITED
+			)
+			LOGGING;
+
+			-- Add comments to the table
+			COMMENT ON TABLE APPS.CALC_ASP1_CONCERNED_SUBJECTS IS 'Перечень заинтересованных субъектов для Актов ПКУ';
+			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.ID IS 'Идентификатор';
+			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.DOC_TYPE_CODE IS 'Код типа записи';
+			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.DOC_ID IS 'ID заголовка акта или настроек';
+			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.BP_ID IS 'ID бизнес партнера';
+			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.CREATE_BY IS 'Автор записи';
+			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.CREATE_DATE IS 'Дата и время создания';
+			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.LAST_UPDATE_BY IS 'Автор изменения';
+			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.LAST_UPDATE_DATE IS 'Дата и время изменения';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-113" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: CALC_ASP1_CONCERNED_SUBJECTS</comment>
+		<createSequence
+				incrementBy="1"
+				maxValue="9999999999999999999999999999"
+				minValue="1"
+				schemaName="APPS"
+				sequenceName="CALC_ASP1_CONCERNED_SUBJECTS_S"
+				startValue="1"/>
+	</changeSet>
+
 </databaseChangeLog>
