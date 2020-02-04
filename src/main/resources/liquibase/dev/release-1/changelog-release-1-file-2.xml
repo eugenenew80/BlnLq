@@ -2029,4 +2029,57 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-118" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> --Create/Recreate/Drop indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create/Recreate indexes
+			create bitmap index APPS.IDX_WF_OBJECT_WORKFLOWS_N1 on APPS.WF_OBJECT_WORKFLOWS (object_code, object_id);
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-119" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate/Drop indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Drop indexes
+			drop index SYSTEM.IDX_CALC_DISTRIBUTION_DEPENDENCIES_N1;
+			drop index SYSTEM.IDX_CALC_DISTRIBUTION_DEPENDENCIES_N2;
+
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-120" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate/Drop indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create/Recreate indexes
+			create bitmap index APPS.IDX_CALC_DISTRIBUTION_DEPENDENCIES_N1 on APPS.CALC_DISTRIBUTION_DEPENDENCIES (SOURCE_DOC_ID)
+			tablespace SYSTEM
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+
+			create bitmap index APPS.IDX_CALC_DISTRIBUTION_DEPENDENCIES_N2 on APPS.CALC_DISTRIBUTION_DEPENDENCIES (TARGET_DOC_ID)
+			tablespace SYSTEM
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
