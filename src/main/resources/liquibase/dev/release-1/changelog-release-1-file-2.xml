@@ -1946,6 +1946,7 @@
 	<changeSet id="lq-con-112" logicalFilePath="path-independent" author="conor" context="dev">
 		<comment> Create table</comment>
 		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+
 			-- Create table
 			CREATE TABLE APPS.CALC_ASP1_CONCERNED_SUBJECTS (
 			ID NUMBER NOT NULL,
@@ -1962,7 +1963,6 @@
 			MAXEXTENTS UNLIMITED
 			)
 			LOGGING;
-
 			-- Add comments to the table
 			COMMENT ON TABLE APPS.CALC_ASP1_CONCERNED_SUBJECTS IS 'Перечень заинтересованных субъектов для Актов ПКУ';
 			COMMENT ON COLUMN APPS.CALC_ASP1_CONCERNED_SUBJECTS.ID IS 'Идентификатор';
@@ -2006,6 +2006,16 @@
 			-- Create/Recreate indexes
 			create index IDX_DICT_CROSS_DATA_ELEMENTS_N8 on APPS.DICT_CROSS_DATA_ELEMENTS (HEADER_ID)
 			tablespace USERS;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-116" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create unique constraint</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table APPS.CALC_ASP1_CONCERNED_SUBJECTS
+			add constraint UN_CALC_ASP1_CONCERNED_SUBJECTS_1 unique (DOC_TYPE_CODE, DOC_ID, BP_ID);
 		</sql>
 		<rollback/>
 	</changeSet>
