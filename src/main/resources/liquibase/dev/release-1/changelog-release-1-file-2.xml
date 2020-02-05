@@ -2082,4 +2082,22 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-121" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate/Drop indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.ITSM_SUPPORT_REQUESTS modify itsm_req_num nvarchar2(100);
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-122" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate/Drop indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.ITSM_SUPPORT_REQUESTS modify itsm_req_num varchar2(100);
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
