@@ -2100,4 +2100,13 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-123" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment>Creating sequence for table: apps.itsm_file_interface</comment>
+		<createSequence
+				incrementBy="1"
+				schemaName="apps"
+				sequenceName="ITSM_FILE_INTERFACE_s"
+				startValue="10"/>
+	</changeSet>
+
 </databaseChangeLog>
