@@ -2109,4 +2109,67 @@
 				startValue="10"/>
 	</changeSet>
 
+	<changeSet id="lq-con-124" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Add/modify columns</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.CALC_DISTRIBUTION_MESSAGES add create_by number;
+			alter table APPS.CALC_DISTRIBUTION_MESSAGES add create_date timestamp;
+			-- Add comments to the columns
+			comment on column APPS.CALC_DISTRIBUTION_MESSAGES.create_by
+			is 'Автор';
+			comment on column APPS.CALC_DISTRIBUTION_MESSAGES.create_date
+			is 'Дата создания';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-125" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Add/modify columns</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.CALC_DISTRIBUTION_MP_OF_SP modify header_id not null;
+			alter table APPS.CALC_DISTRIBUTION_MP_OF_SP modify metering_point_id not null;
+			alter table APPS.CALC_DISTRIBUTION_MP_OF_SP modify unit_id not null;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-126" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Add/modify columns</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.DICT_CROSS_DATA_ELEMENTS add copied_from number;
+			-- Add comments to the columns
+			comment on column APPS.DICT_CROSS_DATA_ELEMENTS.copied_from
+			is 'ID записи, с которой скопировали';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-127" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate indexes</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create/Recreate indexes
+			alter table APPS.DICT_CROSS_DATA_ELEMENTS
+			   drop constraint PK_DICT_CROSS_DATA_ELEMENTS cascade;
+			drop index APPS.PK_DICT_CROSS_DATA_ELEMENTS;
+			create unique index APPS.PK_DICT_CROSS_DATA_ELEMENTS on APPS.DICT_CROSS_DATA_ELEMENTS (ID)
+			tablespace USERS
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+			alter table APPS.DICT_CROSS_DATA_ELEMENTS
+			   add constraint PK_DICT_CROSS_DATA_ELEMENTS unique (ID);
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
