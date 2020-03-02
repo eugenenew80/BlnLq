@@ -2172,4 +2172,84 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-128" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Drop table
+			drop table APPS.CALC_SUPPLY_VOLUME_TEMP;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-129" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			create global temporary table APPS.CALC_SUPPLY_VOLUME_TEMP
+			(
+			session_id              VARCHAR2(50) not null,
+			object_code             VARCHAR2(30) not null,
+			object_id               NUMBER not null,
+			energy_source_id        NUMBER not null,
+			data_element_id         NUMBER not null,
+			energy_source_param_id  NUMBER,
+			plan_fact               VARCHAR2(4) not null,
+			determination_method    VARCHAR2(30),
+			data_source_system_id   NUMBER,
+			bems_code               VARCHAR2(20),
+			metering_point_id       NUMBER,
+			metering_point_param_id NUMBER,
+			influence_degree_code   VARCHAR2(30),
+			affects_on_element_id   NUMBER,
+			is_inverted             NUMBER,
+			val                     NUMBER,
+			is_edited               NUMBER,
+			default_display_order   NUMBER
+			)
+			on commit delete rows;
+
+			-- Add comments to the table
+			comment on table APPS.CALC_SUPPLY_VOLUME_TEMP
+			is 'Временая таблица для расчета объема поставки';
+			-- Add comments to the columns
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.session_id
+			is 'Номер сесии';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.object_code
+			is 'Код объекта';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.object_id
+			is 'Ид объекта';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.energy_source_id
+			is 'Ид энеогоисточника';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.data_element_id
+			is 'Ид элемента данных';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.energy_source_param_id
+			is 'Ид параметра энергоисточника';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.plan_fact
+			is 'Признак план/факт (PLAN - плановое значение, FACT - фактическое значение)';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.determination_method
+			is 'Метод определения значения';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.data_source_system_id
+			is 'Идентификатор системы источника данных';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.bems_code
+			is 'Код СБРЭ';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.metering_point_id
+			is 'Идентификатор точки учета';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.metering_point_param_id
+			is 'Параметр точки учета';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.influence_degree_code
+			is 'Степень влияния на другой параметр (NONE-не влияет, INCREASES-увеличивает, DECREASES-уменьшает)';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.affects_on_element_id
+			is 'Влияет на элемент данных';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.is_inverted
+			is 'Инвертировать направление';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.val
+			is 'Значение';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.is_edited
+			is 'Запись изменялась';
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.default_display_order
+			is 'Порядок отображения в документе по умолчанию';
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
