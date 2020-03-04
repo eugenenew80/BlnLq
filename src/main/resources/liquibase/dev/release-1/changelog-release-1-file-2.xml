@@ -2252,4 +2252,16 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-130" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.CALC_SUPPLY_VOLUME_TEMP add factor number;
+			--Add comments to the columns
+			comment on column APPS.CALC_SUPPLY_VOLUME_TEMP.factor
+			   is 'Множитель';
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
