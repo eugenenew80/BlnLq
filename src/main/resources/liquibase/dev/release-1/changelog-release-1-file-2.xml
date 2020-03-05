@@ -2264,4 +2264,16 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-131" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.CALC_DISTRIBUTION_ES add unit_id number;
+			--Add comments to the columns
+			comment on column APPS.CALC_DISTRIBUTION_ES.unit_id
+			is 'Идентификатор единицы измерения';
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
