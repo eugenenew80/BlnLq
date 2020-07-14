@@ -2302,4 +2302,295 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-134" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			create table apps.BEMS_OPERATIONS
+			(
+			code             VARCHAR2(10 char) not null,
+			name             VARCHAR2(30 char) not null,
+			create_by        NUMBER,
+			create_date      TIMESTAMP(6),
+			last_update_by   NUMBER,
+			last_update_date TIMESTAMP(6)
+			)
+			tablespace USERS
+			pctfree 10
+			initrans 1
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+			-- Add comments to the table
+			comment on table apps.BEMS_OPERATIONS
+			is 'Операции в системе СБРЭ';
+			-- Add comments to the columns
+			comment on column apps.BEMS_OPERATIONS.code
+			is 'Код операции';
+			comment on column apps.BEMS_OPERATIONS.name
+			is 'Наименование';
+			comment on column apps.BEMS_OPERATIONS.create_by
+			is 'Автор записи';
+			comment on column apps.BEMS_OPERATIONS.create_date
+			is 'Дата и время создания';
+			comment on column apps.BEMS_OPERATIONS.last_update_by
+			is 'Автор изменения';
+			comment on column apps.BEMS_OPERATIONS.last_update_date
+			is 'Дата и время изменения';
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table apps.BEMS_OPERATIONS
+			add constraint PK_BEMS_OPERATIONS primary key (CODE)
+			using index
+			tablespace USERS
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-135" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			create table apps.BEMS_SCHEDULES_ERRORS
+			(
+			code             VARCHAR2(30 char) not null,
+			name             VARCHAR2(100 char) not null,
+			create_by        NUMBER,
+			create_date      TIMESTAMP(6),
+			last_update_by   NUMBER,
+			last_update_date TIMESTAMP(6)
+			)
+			tablespace USERS
+			pctfree 10
+			initrans 1
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+			-- Add comments to the table
+			comment on table apps.BEMS_SCHEDULES_ERRORS
+			is 'Коды ошибок загрузки графиков нагрузки в СБРЭ';
+			-- Add comments to the columns
+			comment on column apps.BEMS_SCHEDULES_ERRORS.code
+			is 'Код ошибки';
+			comment on column apps.BEMS_SCHEDULES_ERRORS.name
+			is 'Описание ошибки';
+			comment on column apps.BEMS_SCHEDULES_ERRORS.create_by
+			is 'Автор записи';
+			comment on column apps.BEMS_SCHEDULES_ERRORS.create_date
+			is 'Дата и время создания';
+			comment on column apps.BEMS_SCHEDULES_ERRORS.last_update_by
+			is 'Автор последнего изменения';
+			comment on column apps.BEMS_SCHEDULES_ERRORS.last_update_date
+			is 'Дата и время последнего обновления';
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table apps.BEMS_SCHEDULES_ERRORS
+			add constraint PK_BEMS_SCHEDULES_ERRORS primary key (CODE)
+			using index
+			tablespace USERS
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-136" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			insert into apps.BEMS_OPERATIONS (CODE, NAME, CREATE_BY)
+			values ('BUY', 'Покупка', 1);
+
+			insert into apps.BEMS_OPERATIONS (CODE, NAME, CREATE_BY)
+			values ('SELL', 'Продажа', 1);
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-137" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_SENDER_ERROR', 'Необходимо указать отправителя плана', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_PARTNER_ERROR', 'Необходимо указать контрагента плана', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_OPERATION_ERROR', 'Необходимо указать вид операции плана', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_DATE_ERROR', 'Дата подаваемого плана должна быть больше текущей даты', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_ADD_ERROR', 'Ошибка сохранения заявки. Пожалуйста, убедитесь, что все поля заполнены верно', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_DUPLICATE_ERROR', 'Заявка является дубликатом', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_NEGATIVE_AMOUNTS_ERROR', 'Заявка содержит негативные значения энергии', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_ZERO_AMOUNTS_ERROR', 'Заявка не может быть полностью нулевой', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_QUOTA_ERROR', 'В заявке превышено значение почасовой межзональной квоты', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('ERROR_PLAN_NUMBER', 'Порядковый номер ошибочной заявки', 1);
+
+			insert into apps.BEMS_SCHEDULES_ERRORS (CODE, NAME, CREATE_BY)
+			values ('PLAN_SEND_TIME_LIMIT', 'Закончилось время отправки планов на завтра', 1);
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-138" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			create table apps.RES_DS_LINES_INTERFACE
+			(
+			id             NUMBER not null,
+			ds_line_id     NUMBER not null,
+			plan_date      DATE not null,
+			sender         VARCHAR2(30 char) not null,
+			partner        VARCHAR2(30 char) not null,
+			operation_code VARCHAR2(10 char) not null,
+			status         VARCHAR2(20 char) not null,
+			error_code     VARCHAR2(30 char),
+			bems_plan_id   NUMBER
+			)
+			tablespace USERS
+			pctfree 10
+			initrans 1
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			minextents 1
+			maxextents unlimited
+			);
+			-- Add comments to the table
+			comment on table apps.RES_DS_LINES_INTERFACE
+			is 'Графики покупки и продажи для передачи в СБРЭ';
+			-- Add comments to the columns
+			comment on column apps.RES_DS_LINES_INTERFACE.id
+			is 'Идентификатор';
+			comment on column apps.RES_DS_LINES_INTERFACE.ds_line_id
+			is 'Идентификатор строки графика покупки или продажи';
+			comment on column apps.RES_DS_LINES_INTERFACE.plan_date
+			is 'Дата графика';
+			comment on column apps.RES_DS_LINES_INTERFACE.sender
+			is 'Отправитель';
+			comment on column apps.RES_DS_LINES_INTERFACE.partner
+			is 'Получатель';
+			comment on column apps.RES_DS_LINES_INTERFACE.operation_code
+			is 'Код операции: BUY-покупка, SELL-продажа';
+			comment on column apps.RES_DS_LINES_INTERFACE.status
+			is 'Статус передачи в СБРЭ';
+			comment on column apps.RES_DS_LINES_INTERFACE.error_code
+			is 'Код ошибки в СБРЭ';
+			comment on column apps.RES_DS_LINES_INTERFACE.bems_plan_id
+			is 'Идентификатор созданного графика в СБРЭ';
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table apps.RES_DS_LINES_INTERFACE
+			add constraint PK_RES_DS_LINES_INTERFACE primary key (ID)
+			using index
+			tablespace USERS
+			pctfree 10
+			initrans 2
+			maxtrans 255;
+			alter table apps.RES_DS_LINES_INTERFACE
+			add constraint FK_RES_DS_LINES_INTERFACE_1 foreign key (DS_LINE_ID)
+			references APPS.RES_DAILY_SCHEDULES_LINES (ID);
+			alter table apps.RES_DS_LINES_INTERFACE
+			add constraint FK_RES_DS_LINES_INTERFACE_2 foreign key (OPERATION_CODE)
+			references APPS.BEMS_OPERATIONS (CODE);
+			alter table apps.RES_DS_LINES_INTERFACE
+			add constraint FK_RES_DS_LINES_INTERFACE_3 foreign key (STATUS)
+			references APPS.MEDIA_BATCH_STATUSES (CODE);
+			alter table apps.RES_DS_LINES_INTERFACE
+			add constraint FK_RES_DS_LINES_INTERFACE_4 foreign key (ERROR_CODE)
+			references APPS.BEMS_SCHEDULES_ERRORS (CODE);
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-139" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			create or replace view apps_cfg.res_ds_lines_interface_v as
+			SELECT dsli.id
+			,dsl.header_id
+			,dsli.operation_code
+			,bo.name as operation_name
+			,dsli.plan_date
+			,bp1.short_name as bp1_name
+			,bp2.short_name as bp2_name
+			,des.short_name as energy_source_short_name
+			,des.name as energy_source_name
+			,ez1.name sender_energy_zone_name
+			,(case dsl.tab_page_code
+			when 'PURCHASE' then
+			ez1.name
+			when 'SALE' then
+			ez2.name
+			end) as partner_energy_zone_name
+			,dsli.sender
+			,dsli.partner
+			,dsli.status
+			,mbs.name as status_name
+			,dsli.error_code
+			,bse.name as error_desc
+			,dsli.bems_plan_id
+			FROM apps.res_ds_lines_interface dsli
+			join apps.bems_operations bo on bo.code = dsli.operation_code
+			JOIN apps.res_daily_schedules_lines dsl on dsl.id = dsli.ds_line_id
+			and dsl.tab_page_code in ('PURCHASE', 'SALE')
+			JOIN apps.cm_doc_keg_cte c on c.id = dsl.contract_id
+			JOIN apps.dict_energy_sources_tl des on des.energy_source_id = dsl.energy_source_id
+			and des.lang = adm_cfg.adm_locale
+			LEFT JOIN apps.dict_business_partners_tl bp1 on bp1.id = c.bp1_id
+			and bp1.lang = adm_cfg.adm_locale
+			LEFT JOIN apps.dict_business_partners_tl bp2 on bp2.id = c.bp2_id
+			and bp2.lang = adm_cfg.adm_locale
+			LEFT JOIN apps.dict_energy_zones_tl ez1 on ez1.energy_zone_id = dsl.res_energy_zone_id
+			and ez1.lang = adm_cfg.adm_locale
+			LEFT JOIN apps.dict_energy_zones_tl ez2 on ez2.energy_zone_id = dsl.customer_energy_zone_id
+			and ez2.lang = adm_cfg.adm_locale
+			JOIN apps.media_batch_statuses mbs on mbs.code = dsli.status
+			left join apps.bems_schedules_errors bse on bse.code = dsli.error_code
+			--order by decode(dsl.tab_page_code, 'PURCHASE', 1, 'MIDDLE', 2, 'SALE', 3, 4)
+			;
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
