@@ -2276,4 +2276,30 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-132" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table apps.RES_DISTRIBUTION_EE_ENERGY_ZONES add rfc_bems_code varchar2(30);
+			-- Add comments to the columns
+			comment on column apps.RES_DISTRIBUTION_EE_ENERGY_ZONES.rfc_bems_code
+			is 'Код СБРЭ для ТОО РФЦ в зоне ВИЭ';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-133" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create sequence
+			create sequence apps.RES_DS_LINES_INTERFACE_S
+			minvalue 1
+			maxvalue 999999999999
+			start with 1
+			increment by 1
+			cache 20;
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
