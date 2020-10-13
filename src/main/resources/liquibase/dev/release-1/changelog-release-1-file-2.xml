@@ -2741,4 +2741,38 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-144" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Insert data </comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			--insert data
+			insert into apps.dict_electricity_producer_types (CODE, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('UP', 'Условный потребитель', null, null, 1, null);
+
+			insert into apps.dict_electricity_producer_types (CODE, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('KUP', 'Квалифицированный условный потребитель', null, null, 1, null);
+
+			insert into apps.dict_electricity_producer_types (CODE, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('NA_VIE', 'Производитель на ВИЭ', null, null, 1, null);
+
+			insert into apps.dict_electricity_producer_types_tl (CODE, LANG, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('UP', 'KZ', 'Условный потребитель', null, null, 1, null);
+
+			insert into apps.dict_electricity_producer_types_tl (CODE, LANG, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('UP', 'RU', 'Условный потребитель', null, null, 1, null);
+
+			insert into apps.dict_electricity_producer_types_tl (CODE, LANG, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('KUP', 'KZ', 'Квалифицированный условный потребитель', null, null, 1, null);
+
+			insert into apps.dict_electricity_producer_types_tl (CODE, LANG, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('KUP', 'RU', 'Квалифицированный условный потребитель', null, null, 1, null);
+
+			insert into apps.dict_electricity_producer_types_tl (CODE, LANG, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('NA_VIE', 'KZ', 'Производитель на ВИЭ', null, null, 1, null);
+
+			insert into apps.dict_electricity_producer_types_tl (CODE, LANG, NAME, CREATE_DATE, LAST_UPDATE_DATE, CREATE_BY, LAST_UPDATE_BY)
+			values ('NA_VIE', 'RU', 'Производитель на ВИЭ', null, null, 1, null);
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
