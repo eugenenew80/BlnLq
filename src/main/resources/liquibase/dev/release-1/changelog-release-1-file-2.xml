@@ -2593,4 +2593,85 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-140" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Drop table</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.DICT_BP_ADDRESS_INTERFACE modify address_type null;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-141" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Add column</comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table APPS.CALC_METERING_POINT_SETTING_HEADERS add doc_type_code varchar2(50);
+			-- Add comments to the columns
+			comment on column APPS.CALC_METERING_POINT_SETTING_HEADERS.doc_type_code
+			is 'Код типа документа';
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-142" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create table </comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			create table apps.DICT_ELECTRICITY_PRODUCER_TYPES
+			( CODE                          VARCHAR2(20),
+			NAME                          VARCHAR2(300),
+			CREATE_DATE                   TIMESTAMP(6),
+			LAST_UPDATE_DATE              TIMESTAMP(6),
+			CREATE_BY                     NUMBER,
+			LAST_UPDATE_BY                NUMBER
+			)
+			tablespace USERS
+			pctfree 10
+			initrans 1
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+
+			-- Add comments to the table
+			comment on table apps.DICT_ELECTRICITY_PRODUCER_TYPES
+			is 'Справочник виды бизнес-партнеров по типам имеющихся электростанции';
+			-- Add comments to the columns
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES.CODE
+			is 'Код';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES.NAME
+			is 'Наименование';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES.CREATE_DATE
+			is 'Дата создания';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES.LAST_UPDATE_DATE
+			is 'Дата последнего обновления';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES.CREATE_BY
+			is 'Автор';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES.LAST_UPDATE_BY
+			is 'Автор последнего обновления';
+
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table apps.DICT_ELECTRICITY_PRODUCER_TYPES
+			add constraint PK_DICT_ELECTRICITY_PRODUCER_TYPES primary key (CODE)
+			using index
+			tablespace USERS
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
