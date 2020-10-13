@@ -2793,4 +2793,16 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-146" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Add/modify columns </comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table apps.RES_MONTHLY_CALC_LINES add res_amount number;
+			-- Add comments to the columns
+			comment on column apps.RES_MONTHLY_CALC_LINES.res_amount
+			is 'Объем электроэнергии по ВИЭ';
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
