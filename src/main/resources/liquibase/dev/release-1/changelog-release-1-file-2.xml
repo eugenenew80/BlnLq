@@ -2775,4 +2775,22 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-145" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Add/modify columns </comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Add/modify columns
+			alter table apps.DICT_BUSINESS_PARTNERS add electricity_producer_type_code varchar2(20);
+			-- Add comments to the columns
+			comment on column apps.DICT_BUSINESS_PARTNERS.electricity_producer_type_code
+			is 'Вид бизнес-партнера по типам имеющихся электростанции';
+
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table apps.DICT_BUSINESS_PARTNERS
+			add constraint FK_DICT_BUSINESS_PARTNERS_6 foreign key (ELECTRICITY_PRODUCER_TYPE_CODE)
+			references apps.dict_electricity_producer_types (CODE)
+			deferrable initially deferred;
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
