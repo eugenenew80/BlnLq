@@ -2674,4 +2674,71 @@
 		<rollback/>
 	</changeSet>
 
+	<changeSet id="lq-con-143" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create table </comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Create table
+			create table apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL
+			(
+			CODE             VARCHAR2(20) not null,
+			LANG             VARCHAR2(10) not null,
+			NAME             VARCHAR2(300) not null,
+			CREATE_DATE      TIMESTAMP(6),
+			LAST_UPDATE_DATE TIMESTAMP(6),
+			CREATE_BY        NUMBER,
+			LAST_UPDATE_BY   NUMBER
+			)
+			tablespace USERS
+			pctfree 10
+			initrans 1
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+			-- Add comments to the table
+			comment on table apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL
+			is 'Справочник виды бизнес-партнеров по типам имеющихся электростанции (Перевод)';
+			-- Add comments to the columns
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL.code
+			is 'Код';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL.lang
+			is 'Язык';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL.name
+			is 'Наименование';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL.create_date
+			is 'Дата создания';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL.last_update_date
+			is 'Дата последнего обновления';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL.create_by
+			is 'Автор';
+			comment on column apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL.last_update_by
+			is 'Автор последнего обновления';
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL
+			add constraint PK_DICT_ELECTRICITY_PRODUCER_TYPES_TL primary key (CODE, LANG)
+			deferrable initially deferred
+			using index
+			tablespace USERS
+			pctfree 10
+			initrans 2
+			maxtrans 255
+			storage
+			(
+			initial 64K
+			next 1M
+			minextents 1
+			maxextents unlimited
+			);
+			alter table apps.DICT_ELECTRICITY_PRODUCER_TYPES_TL
+			add constraint FK_DICT_ELECTRICITY_PRODUCER_TYPES_TL_1 foreign key (CODE)
+			references apps.DICT_ELECTRICITY_PRODUCER_TYPES (CODE) on delete cascade
+			deferrable initially deferred;
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
