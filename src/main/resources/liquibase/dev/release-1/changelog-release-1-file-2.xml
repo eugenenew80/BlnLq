@@ -2805,4 +2805,28 @@
 		<rollback/>
 	</changeSet>
 
+    <changeSet id="lq-con-147" logicalFilePath="path-independent" author="conor" context="dev">
+        <comment> Add/modify columns </comment>
+        <sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+            -- Add/modify columns
+            alter table apps.RES_DS_LINES_INTERFACE add create_by number;
+            alter table apps.RES_DS_LINES_INTERFACE add create_date timestamp(6);
+            alter table apps.RES_DS_LINES_INTERFACE add last_update_by number;
+            alter table apps.RES_DS_LINES_INTERFACE add last_update_date timestamp(6);
+            -- Add comments to the columns
+            comment on column apps.RES_DS_LINES_INTERFACE.create_by
+            is 'Автор записи';
+            comment on column apps.RES_DS_LINES_INTERFACE.create_date
+            is 'Дата и время создания';
+            comment on column apps.RES_DS_LINES_INTERFACE.last_update_by
+            is 'Автор изменения';
+            comment on column apps.RES_DS_LINES_INTERFACE.last_update_date
+            is 'Дата и время изменения';
+
+            -- Create/Recreate indexes
+            create unique index IDX_RES_DS_LINES_INTERFACE_U1 on apps.RES_DS_LINES_INTERFACE (ds_line_id, operation_code);
+        </sql>
+        <rollback/>
+    </changeSet>
+
 </databaseChangeLog>
