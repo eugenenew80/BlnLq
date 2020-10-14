@@ -2845,4 +2845,34 @@
         <rollback/>
     </changeSet>
 
+	<changeSet id="lq-con-150" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate primary, unique and foreign key constraints </comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Drop primary, unique and foreign key constraints
+			alter table APPS.CALC_LOSS_FACT_RESULT_SEC2_LINES
+			drop constraint FK_CALC_LOSS_FACT_RESULT_SEC2_LINES_2;
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table APPS.CALC_LOSS_FACT_RESULT_SEC2_LINES
+			add constraint FK_CALC_LOSS_FACT_RESULT_SEC2_LINES_2 foreign key (ORG_ID)
+			references APPS.dict_organizations (ID)
+			deferrable;
+		</sql>
+		<rollback/>
+	</changeSet>
+
+	<changeSet id="lq-con-151" logicalFilePath="path-independent" author="conor" context="dev">
+		<comment> Create/Recreate primary, unique and foreign key constraints </comment>
+		<sql dbms="postgres, oracle" endDelimiter=";" splitStatements="true" stripComments="true">
+			-- Drop primary, unique and foreign key constraints
+			alter table APPS.CALC_LOSS_FACT_RESULT_SEC2_LINES
+			drop constraint FK_CALC_LOSS_FACT_RESULT_SEC2_LINES_3;
+			-- Create/Recreate primary, unique and foreign key constraints
+			alter table APPS.CALC_LOSS_FACT_RESULT_SEC2_LINES
+			add constraint FK_CALC_LOSS_FACT_RESULT_SEC2_LINES_3 foreign key (METERING_POINT_ID)
+			references APPS.dict_metering_points (ID)
+			deferrable;
+		</sql>
+		<rollback/>
+	</changeSet>
+
 </databaseChangeLog>
